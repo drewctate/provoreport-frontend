@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FullCalendarModule } from 'ng-fullcalendar';
 
 import { AppComponent } from './app.component';
 import { EventCalendarComponent } from './event-calendar/event-calendar.component';
@@ -40,6 +41,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    FullCalendarModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
