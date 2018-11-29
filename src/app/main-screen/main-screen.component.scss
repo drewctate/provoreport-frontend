@@ -1,4 +1,8 @@
-/* Style the tab */
+.filters {
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
 .nav {
     overflow: hidden;
     border: 1px solid #ccc;
@@ -7,8 +11,8 @@
     height: 52px;
     text-align: center;
 
-    h2 {
-        margin-top: 6px;
+    h3 {
+        margin-top: 10px;
     }
 
     /* Style the buttons that are used to open the tab content */
