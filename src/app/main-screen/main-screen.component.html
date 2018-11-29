@@ -3,14 +3,17 @@
 </p>
 <div class="row">
   <div class="col-sm">
-    <div class="tab">
-      <button class="tablinks" routerLink="/feed" routerLinkActive="active">Feed View</button>
-      <button class="tablinks" routerLink="/calendar" routerLinkActive="active">Calendar View</button>
+    <div class="nav">
+      <button class="tablinks" routerLink="/feed" routerLinkActive="active">Feed</button>
+      <button class="tablinks" routerLink="/calendar" routerLinkActive="active">Calendar</button>
     </div>
     <router-outlet></router-outlet>
   </div>
   <div class="col-sm-3">
-    <div class="tab">Favorites</div>
-    One of three columns
+    <div class="nav">
+      <h2>
+        Saved Events
+      </h2>
+    </div>
   </div>
 </div>
