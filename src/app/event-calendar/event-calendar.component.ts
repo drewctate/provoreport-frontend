@@ -17,10 +17,11 @@ export class EventCalendarComponent implements OnInit {
     this.calendarOptions = {
       editable: true,
       eventLimit: false,
+      // themeSystem: 'bootstrap3',
       header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'month,agendaWeek,agendaDay,listMonth'
+        right: 'month,agendaWeek,agendaDay'
       },
       events: []
     };
