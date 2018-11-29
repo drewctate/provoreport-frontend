@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { EventsService } from '../services';
+import { Event } from '../types';
 
 @Component({
   selector: 'app-event-feed',
@@ -8,7 +9,7 @@ import { EventsService } from '../services';
 })
 export class EventFeedComponent {
 
-  public events: any[];
+  public events: Event[];
 
   constructor(eventsService: EventsService) {
     eventsService.getEvents()

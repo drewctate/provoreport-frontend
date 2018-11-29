@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Event } from '../../types';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ export class EventsService {
 
   constructor() { }
 
-  getEvents() {
+  public getEvents(): Promise<Event[]> {
     return Promise.resolve(
       [
         {

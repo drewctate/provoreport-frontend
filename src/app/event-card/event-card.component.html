@@ -1,5 +1,24 @@
 <div class="card">
   <div class="container">
-    {{event.title}}
+    <div>
+      <img class="thumbnail" src={{event.thumbnail}}>
+    </div>
+    <div class="event-info">
+      <h4><a href={{event.url}} target="_blank">{{event.title}}</a></h4>
+      <table>
+        <tr *ngIf="event.location">
+          <td>Location:</td>
+          <td>{{event.location}}</td>
+        </tr>
+        <tr *ngIf="event.time">
+          <td>Time:</td>
+          <td>{{event.time}}</td>
+        </tr>
+      </table>
+
+    </div>
+    <div class="actions">
+      actions
+    </div>
   </div>
 </div>
