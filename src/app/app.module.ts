@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 import { EventCalendarComponent } from './event-calendar/event-calendar.component';
 import { EventFeedComponent } from './event-feed/event-feed.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
+import { EventCardComponent } from './event-card/event-card.component';
+
+import { EventsService } from './services';
 
 const appRoutes: Routes = [
   {
@@ -36,6 +39,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     EventCalendarComponent,
+    EventCardComponent,
     EventFeedComponent,
     MainScreenComponent,
   ],
@@ -47,7 +51,7 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [],
+  providers: [EventsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

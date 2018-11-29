@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { EventsService } from '../services';
 
 @Component({
   selector: 'app-event-feed',
   templateUrl: './event-feed.component.html',
   styleUrls: ['./event-feed.component.scss']
 })
-export class EventFeedComponent implements OnInit {
+export class EventFeedComponent {
 
-  constructor() { }
+  public events: any[];
 
-  ngOnInit() {
+  constructor(eventsService: EventsService) {
+    eventsService.getEvents()
+      .then(events => this.events = events);
   }
 
 }
