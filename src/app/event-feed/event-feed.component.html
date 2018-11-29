@@ -1,1 +1,1 @@
-<app-event-card *ngFor="let event of events" [event]="event"></app-event-card>
+<app-event-card *ngFor="let event of events" (saveEvent)="saveEvent($event)" [event]="event"></app-event-card>

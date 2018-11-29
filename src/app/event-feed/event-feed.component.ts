@@ -11,9 +11,13 @@ export class EventFeedComponent {
 
   public events: Event[];
 
-  constructor(eventsService: EventsService) {
+  constructor(private eventsService: EventsService) {
     eventsService.getEvents()
       .then(events => this.events = events);
+  }
+
+  public saveEvent(event: Event) {
+    this.eventsService.saveEvent(event);
   }
 
 }

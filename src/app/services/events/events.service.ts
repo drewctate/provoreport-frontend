@@ -6,7 +6,21 @@ import { Event } from '../../types';
 })
 export class EventsService {
 
+  private _savedEvents: Event[] = [];
+
   constructor() { }
+
+  get savedEvents() {
+    return this._savedEvents;
+  }
+
+  public saveEvent(event: Event) {
+    this._savedEvents.push(event);
+  }
+
+  public unsaveEvent(event: Event) {
+    this._savedEvents = this._savedEvents.filter(saved => saved.title !== event.title);
+  }
 
   public getEvents(): Promise<Event[]> {
     return Promise.resolve(

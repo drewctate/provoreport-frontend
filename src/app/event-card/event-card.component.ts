@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AddToCalendarService } from '../services';
 import { Event } from '../types';
 
@@ -10,9 +10,14 @@ import { Event } from '../types';
 export class EventCardComponent {
 
   @Input() event;
+  @Output() saveEvent = new EventEmitter<Event>();
 
   constructor(private addToCalendar: AddToCalendarService) {
 
+  }
+
+  public save(event) {
+    this.saveEvent.emit(event);
   }
 
   public getGoogleCalendarUrl(event: Event) {
