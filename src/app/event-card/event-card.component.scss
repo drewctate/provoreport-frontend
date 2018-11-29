@@ -25,6 +25,19 @@
             }
         }
 
+        .actions {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            padding: 6px 0;
+            width: 50px;
+
+            .icon {
+                cursor: pointer;
+                width: 40px;
+            }
+        }
+
         .thumbnail {
             height: 100px;
             width: auto;
