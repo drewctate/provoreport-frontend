@@ -9,7 +9,7 @@ import { EventFeedComponent } from './event-feed/event-feed.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 import { EventCardComponent } from './event-card/event-card.component';
 
-import { EventsService } from './services';
+import { AddToCalendarService, EventsService } from './services';
 
 const appRoutes: Routes = [
   {
@@ -51,7 +51,10 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [EventsService],
+  providers: [
+    AddToCalendarService,
+    EventsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
