@@ -10,14 +10,20 @@ import { Event } from '../types';
 export class EventCardComponent {
 
   @Input() event;
+  @Input() saved;
   @Output() saveEvent = new EventEmitter<Event>();
+  @Output() unSaveEvent = new EventEmitter<Event>();
 
   constructor(private addToCalendar: AddToCalendarService) {
 
   }
 
-  public save(event) {
+  public save(event: Event) {
     this.saveEvent.emit(event);
+  }
+
+  public unSave(event: Event) {
+    this.unSaveEvent.emit(event);
   }
 
   public getGoogleCalendarUrl(event: Event) {

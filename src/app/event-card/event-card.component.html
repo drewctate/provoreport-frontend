@@ -18,7 +18,8 @@
 
     </div>
     <div class="actions">
-      <img class="icon" (click)="save(event)" alt="Save event" src="assets/heart-outline.svg">
+      <img *ngIf="!saved" class="icon" (click)="save(event)" alt="Save event" src="assets/heart-outline.svg">
+      <img *ngIf="saved" class="icon" (click)="unSave(event)" alt="Save event" src="assets/save-calendar.svg">
       <a href="{{getGoogleCalendarUrl(event)}}" target="_blank"><img class="icon" alt="Add to calendar" src="assets/save-calendar.svg"></a>
     </div>
   </div>

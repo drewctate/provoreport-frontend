@@ -20,4 +20,12 @@ export class EventFeedComponent {
     this.eventsService.saveEvent(event);
   }
 
+  public unSaveEvent(event: Event) {
+    this.eventsService.unSaveEvent(event);
+  }
+
+  public isEventSaved(event: Event) {
+    return this.eventsService.isSavedEvent(event);
+  }
+
 }

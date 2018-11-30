@@ -1,0 +1,2 @@
+<app-event-card *ngFor="let event of savedEvents" (unSaveEvent)="unSaveEvent($event)" [saved]="eventsService.isSavedEvent(event)"
+    [event]="event"></app-event-card>

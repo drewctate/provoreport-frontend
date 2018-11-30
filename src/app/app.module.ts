@@ -10,6 +10,7 @@ import { MainScreenComponent } from './main-screen/main-screen.component';
 import { EventCardComponent } from './event-card/event-card.component';
 
 import { AddToCalendarService, EventsService } from './services';
+import { SavedEventsComponent } from './saved-events/saved-events.component';
 
 const appRoutes: Routes = [
   {
@@ -42,6 +43,7 @@ const appRoutes: Routes = [
     EventCardComponent,
     EventFeedComponent,
     MainScreenComponent,
+    SavedEventsComponent,
   ],
   imports: [
     BrowserModule,

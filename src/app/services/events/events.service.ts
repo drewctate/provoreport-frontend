@@ -6,26 +6,33 @@ import { Event } from '../../types';
 })
 export class EventsService {
 
-  private _savedEvents: Event[] = [];
+  private _savedEvents: Map<number, Event> = new Map();
 
   constructor() { }
 
   get savedEvents() {
-    return this._savedEvents;
+    return Array.from(this._savedEvents.values());
   }
 
   public saveEvent(event: Event) {
-    this._savedEvents.push(event);
+    if (!this.isSavedEvent(event)) {
+      this._savedEvents.set(event.id, event);
+    }
   }
 
-  public unsaveEvent(event: Event) {
-    this._savedEvents = this._savedEvents.filter(saved => saved.title !== event.title);
+  public unSaveEvent(event: Event) {
+    this._savedEvents.delete(event.id);
+  }
+
+  public isSavedEvent(event: Event) {
+    return this._savedEvents.has(event.id);
   }
 
   public getEvents(): Promise<Event[]> {
     return Promise.resolve(
       [
         {
+          id: 1,
           title: 'Fall 2018 Reason for Hope',
           url: 'https://calendar.byu.edu/event/fall-2018-reason-hope',
           time: '10:00 AM to 4:00 PM',
@@ -33,6 +40,7 @@ export class EventsService {
           thumbnail: 'https://calendar.byu.edu/sites/default/files/styles/thumbnail/public/Other_600x600.jpg?itok=d4gtvndZ'
         },
         {
+          id: 2,
           title: 'Utah Valley University - BYU Women\'s Basketball',
           url: 'https://calendar.byu.edu/event/utah-valley-university-byu-womens-basketball',
           time: '11:00 AM to 1:00 PM',
@@ -40,6 +48,7 @@ export class EventsService {
           thumbnail: 'https://calendar.byu.edu/sites/default/files/styles/thumbnail/public/Athletics_600x600.jpg?itok=-BMDPJOC'
         },
         {
+          id: 3,
           title: 'Disciple Scholar Lecture Series with Dr. Julie Crockett',
           url: 'https://calendar.byu.edu/event/disciple-scholar-lecture-series-dr-julie-crockett',
           time: '5:30 PM to 7:00 PM',
@@ -47,6 +56,7 @@ export class EventsService {
           thumbnail: 'https://calendar.byu.edu/sites/default/files/styles/thumbnail/public/Crockett_Julie_web-compressor_new-1_0.jpg?itok=bCCDjUEW'
         },
         {
+          id: 4,
           title: 'BYU Luau',
           url: 'https://calendar.byu.edu/event/byu-luau-1',
           time: '6:00 PM',
@@ -54,6 +64,7 @@ export class EventsService {
           thumbnail: 'https://calendar.byu.edu/sites/default/files/styles/thumbnail/public/LUAUblock6x6.jpg?itok=y79NdE6f'
         },
         {
+          id: 5,
           title: 'Free Live Animal Show - Classification',
           url: 'https://calendar.byu.edu/event/free-live-animal-show-classification-64',
           time: '7:30 PM to 8:15 PM',
@@ -61,60 +72,70 @@ export class EventsService {
           thumbnail: 'https://calendar.byu.edu/sites/default/files/styles/thumbnail/public/Classification_CalendarIcon.jpg?itok=jcys0xOk'
         },
         {
+          id: 6,
           title: '100 Dollar Show',
           url: 'https://www.utahvalley.com/event/100-dollar-show/23958/',
           location: 'Venue: Springville Museum of Art',
           thumbnail: 'https://assets.simpleviewcms.com/simpleview/image/fetch/c_fill,h_215,q_75,w_215/https://res.cloudinary.com/simpleview/image/upload/crm/utahvalley/6.Katrina-Berg-i-llbethere.katrinaberg_88a57cd5-5056-a36a-0bfbbd49c83712d0.jpg'
         },
         {
+          id: 6,
           title: '2018 Holiday Beehive Bazaar Handmade Art and Craft Fair',
           url: 'https://www.utahvalley.com/event/2018-holiday-beehive-bazaar-handmade-art-and-craft-fair/23970/',
           location: 'The Bright Building',
           thumbnail: 'https://assets.simpleviewcms.com/simpleview/image/fetch/c_fill,h_215,q_75,w_215/https://res.cloudinary.com/simpleview/image/upload/crm/utahvalley/web-postcard-01_f19e5ef6-5056-a36a-0b6625fdf3ec57b8.jpg'
         },
         {
+          id: 7,
           title: '33rd Annual Spiritual and Religious Art of Utah',
           url: 'https://www.utahvalley.com/event/33rd-annual-spiritual-and-religious-art-of-utah/23961/',
           location: 'Venue: Springville Museum of Art',
           thumbnail: 'https://assets.simpleviewcms.com/simpleview/image/fetch/c_fill,h_215,q_75,w_215/https://res.cloudinary.com/simpleview/image/upload/crm/utahvalley/Springville-Museum-32-annual-246_849b8147-5056-a36a-0b0eeec26873f7fc.jpg'
         },
         {
+          id: 8,
           title: 'A Christmas Carol',
           url: 'https://www.utahvalley.com/event/a-christmas-carol/24991/',
           location: 'Venue: Hale Center Theater Orem',
           thumbnail: 'https://assets.simpleviewcms.com/simpleview/image/fetch/c_fill,h_215,q_75,w_215/https://res.cloudinary.com/simpleview/image/upload/crm/utahvalley/Christmas-Carol-2018_6a01b863-5056-a36a-0bd2e6381975a39c.jpg'
         },
         {
+          id: 9,
           title: 'Country Swing/Dance',
           url: 'https://www.utahvalley.com/event/country-swing-dance/23687/',
           location: '',
           thumbnail: 'https://assets.simpleviewcms.com/simpleview/image/fetch/c_fill,h_215,q_75,w_215/https://res.cloudinary.com/simpleview/image/upload/crm/utahvalley/LocoSwingDance2460_b7d0b7ec-5056-a36a-0b4dac9b51a182a2.jpg'
         },
         {
+          id: 10,
           title: 'Faculty Art Show',
           url: 'https://www.utahvalley.com/event/faculty-art-show/23770/',
           location: 'Venue: Woodbury Art Museum (Utah Valley University)',
           thumbnail: 'https://assets.simpleviewcms.com/simpleview/image/fetch/c_fill,h_215,q_75,w_215/https://res.cloudinary.com/simpleview/image/upload/crm/utahvalley/faculty_show_web0_20ed4af8-5056-a36a-0b3822920500d7a5.jpg'
         },
         {
+          id: 11,
           title: 'Holiday Concert with the UVU Symphony',
           url: 'https://www.utahvalley.com/event/holiday-concert-with-the-uvu-symphony/23895/',
           location: 'Venue: Utah Valley University Performing Arts',
           thumbnail: 'https://assets.simpleviewcms.com/simpleview/image/fetch/c_fill,h_215,q_75,w_215/https://res.cloudinary.com/simpleview/image/upload/crm/utahvalley/HolidayConcert2018_400px0_f64b61a2-5056-a36a-0b9d0de1273e9a0c.jpg'
         },
         {
+          id: 12,
           title: 'Holy Cow Boutique Christmas Show',
           url: 'https://www.utahvalley.com/event/holy-cow-boutique-christmas-show/23679/',
           location: 'Summit Center',
           thumbnail: 'https://assets.simpleviewcms.com/simpleview/image/fetch/c_fill,h_215,q_75,w_215/https://res.cloudinary.com/simpleview/image/upload/crm/utahvalley/Shopping-at-the-Bazaar3_1e82a22f-5056-a36a-0b8b628ceeb7a3ed.jpg'
         },
         {
+          id: 13,
           title: 'Holy Cow Christmas Boutique',
           url: 'https://www.utahvalley.com/event/holy-cow-christmas-boutique/23954/',
           location: 'Summit Center',
           thumbnail: 'https://assets.simpleviewcms.com/simpleview/image/fetch/c_fill,h_215,q_75,w_215/https://res.cloudinary.com/simpleview/image/upload/crm/utahvalley/Christmas-Tree4_f90b93a5-5056-a36a-0b4a091da916a633.jpg'
         },
         {
+          id: 14,
           title: 'Lite Brite Nite',
           url: 'https://www.utahvalley.com/event/lite-brite-nite/23931/',
           location: 'Venue: University Place',
