@@ -1,2 +1,9 @@
-<app-event-card *ngFor="let event of savedEvents" (unSaveEvent)="unSaveEvent($event)" [saved]="eventsService.isSavedEvent(event)"
-    [event]="event"></app-event-card>
+<span *ngIf="savedEvents.length">
+    <app-event-card *ngFor="let event of savedEvents" (unSaveEvent)="unSaveEvent($event)" [saved]="eventsService.isSavedEvent(event)"
+        [event]="event"></app-event-card>
+</span>
+<span *ngIf="!savedEvents.length">
+    <div class="no-favorites">
+        <h4>Favorited Events Will Appear Here...</h4>
+    </div>
+</span>

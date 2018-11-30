@@ -18,9 +18,11 @@
 
     </div>
     <div class="actions">
-      <img *ngIf="!saved" class="icon" (click)="save(event)" alt="Save event" src="assets/heart-outline.svg">
-      <img *ngIf="saved" class="icon" (click)="unSave(event)" alt="Save event" src="assets/save-calendar.svg">
-      <a href="{{getGoogleCalendarUrl(event)}}" target="_blank"><img class="icon" alt="Add to calendar" src="assets/save-calendar.svg"></a>
+      <i *ngIf="!saved" class="fa fa-heart-o icon" (click)="save(event)" alt="Save event" aria-hidden="true"></i>
+      <i *ngIf="saved" class="fa fa-heart icon" (click)="unSave(event)" alt="Un-save event" aria-hidden="true"></i>
+      <a href="{{getGoogleCalendarUrl(event)}}" target="_blank">
+        <i class="fa fa-calendar-plus-o icon color-black" aria-hidden="true"></i>
+      </a>
     </div>
   </div>
 </div>

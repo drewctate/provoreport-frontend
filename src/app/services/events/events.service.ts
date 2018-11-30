@@ -79,7 +79,7 @@ export class EventsService {
           thumbnail: 'https://assets.simpleviewcms.com/simpleview/image/fetch/c_fill,h_215,q_75,w_215/https://res.cloudinary.com/simpleview/image/upload/crm/utahvalley/6.Katrina-Berg-i-llbethere.katrinaberg_88a57cd5-5056-a36a-0bfbbd49c83712d0.jpg'
         },
         {
-          id: 6,
+          id: 15,
           title: '2018 Holiday Beehive Bazaar Handmade Art and Craft Fair',
           url: 'https://www.utahvalley.com/event/2018-holiday-beehive-bazaar-handmade-art-and-craft-fair/23970/',
           location: 'The Bright Building',
