@@ -50,7 +50,7 @@ const appRoutes: Routes = [
     FullCalendarModule,
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      { useHash: true }
     )
   ],
   providers: [
