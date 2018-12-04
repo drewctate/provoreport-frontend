@@ -1,28 +1,35 @@
-<div class="card">
-  <div class="container">
-    <div>
-      <img class="thumbnail" src={{event.thumbnail}}>
-    </div>
-    <div class="event-info">
-      <h4><a href={{event.url}} target="_blank">{{event.title}}</a></h4>
-      <table>
-        <tr *ngIf="event.location">
-          <td>Location:</td>
-          <td>{{event.location}}</td>
-        </tr>
-        <tr *ngIf="event.time">
-          <td>Time:</td>
-          <td>{{event.time}}</td>
-        </tr>
-      </table>
+<div class="card margin-bottom">
+  <div class="app-flex-column container">
+    <div class="app-flex-row">
+      <div>
+        <img class="thumbnail" src={{event.thumbnail}}>
+      </div>
+      <div class="event-info">
+        <h4><a href={{event.url}} target="_blank">{{event.title}}</a></h4>
+        <table>
+          <tr *ngIf="event.location">
+            <td>Location:</td>
+            <td>{{event.location}}</td>
+          </tr>
+          <tr *ngIf="event.time">
+            <td>Time:</td>
+            <td>{{event.time}}</td>
+          </tr>
+        </table>
 
+      </div>
+      <div class="actions">
+        <i *ngIf="!saved" class="fa fa-heart-o icon" (click)="save(event)" alt="Save event" aria-hidden="true"></i>
+        <i *ngIf="saved" class="fa fa-heart icon" (click)="unSave(event)" alt="Un-save event" aria-hidden="true"></i>
+        <a href="{{getGoogleCalendarUrl(event)}}" target="_blank">
+          <i class="fa fa-calendar-plus-o icon color-black" aria-hidden="true"></i>
+        </a>
+      </div>
     </div>
-    <div class="actions">
-      <i *ngIf="!saved" class="fa fa-heart-o icon" (click)="save(event)" alt="Save event" aria-hidden="true"></i>
-      <i *ngIf="saved" class="fa fa-heart icon" (click)="unSave(event)" alt="Un-save event" aria-hidden="true"></i>
-      <a href="{{getGoogleCalendarUrl(event)}}" target="_blank">
-        <i class="fa fa-calendar-plus-o icon color-black" aria-hidden="true"></i>
-      </a>
+    <div *ngIf="event.tags && event.tags.length" class="tag-wrapper app-flex-row">
+      <mat-chip-list>
+        <mat-chip *ngFor="let tag of event.tags">{{tag}}</mat-chip>
+      </mat-chip-list>
     </div>
   </div>
 </div>

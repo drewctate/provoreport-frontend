@@ -5,4 +5,5 @@ export interface Event {
     time?: string;
     location?: string;
     thumbnail: string;
+    tags: string[];
 }

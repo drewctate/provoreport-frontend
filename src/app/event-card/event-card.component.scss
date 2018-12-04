@@ -1,47 +1,38 @@
-.card {
-    /* Add shadows to create the "card" effect */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    width: 100%;
+/* Add some padding inside the card container */
+.container {
+    padding: 5px 16px;
 
-    &:hover{
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    .event-info {
+        flex-grow: 1;
+        padding: 8px 8px 8px 12px;
+
+        td {
+            padding-right: 8px;
+            min-width: 70px;
+            vertical-align: top;
+        }
     }
 
-    /* Add some padding inside the card container */
-    .container {
-        padding: 5px 16px;
+    .actions {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        justify-content: space-around;
+        padding: 6px 0;
+        width: 35px;
 
-        .event-info {
-            flex-grow: 1;
-            padding: 8px 8px 8px 12px;
-
-            td {
-                padding-right: 8px;
-                min-width: 70px;
-                vertical-align: top;
-            }
-        }
-
-        .actions {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            padding: 6px 0;
-            width: 35px;
-
-            .icon {
-                cursor: pointer;
-                font-size: 35px;
-            }
-        }
-
-        .thumbnail {
-            height: 100px;
-            width: auto;
+        .icon {
+            cursor: pointer;
+            font-size: 35px;
         }
     }
 
+    .thumbnail {
+        height: 100px;
+        width: auto;
+    }
+
+    .tag-wrapper {
+        padding: 10px 0 0 0;
+        justify-content: flex-end;
+    }
 }
