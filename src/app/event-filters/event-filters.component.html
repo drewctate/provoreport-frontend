@@ -1,0 +1,9 @@
+<div class="filters border-1">
+  <h3>
+    Filters
+  </h3>
+  <mat-chip-list multiple>
+    <mat-chip *ngFor="let info of tagInfos" [selected]="isTagSelected(info)" (click)="toggleSelected(info)">{{info.tag}}
+      ({{info.count}})</mat-chip>
+  </mat-chip-list>
+</div>

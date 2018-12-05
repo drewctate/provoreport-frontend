@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { EventCalendarComponent } from './event-calendar/event-calendar.component';
 import { EventCardComponent } from './event-card/event-card.component';
 import { EventFeedComponent } from './event-feed/event-feed.component';
+import { EventFiltersComponent } from './event-filters/event-filters.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 import { SavedEventsComponent } from './saved-events/saved-events.component';
 
@@ -43,6 +44,7 @@ const appRoutes: Routes = [
     EventCalendarComponent,
     EventCardComponent,
     EventFeedComponent,
+    EventFiltersComponent,
     MainScreenComponent,
     SavedEventsComponent,
   ],
