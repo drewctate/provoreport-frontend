@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { MatChipsModule } from '@angular/material';
+import { MatChipsModule, MatMenuModule } from '@angular/material';
 
 @NgModule({
-    imports: [MatChipsModule],
-    exports: [MatChipsModule],
+    imports: [MatChipsModule, MatMenuModule],
+    exports: [MatChipsModule, MatMenuModule],
 })
 
 export class AppMaterialModule { }

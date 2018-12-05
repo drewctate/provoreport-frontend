@@ -21,9 +21,15 @@
       <div class="actions">
         <i *ngIf="!saved" class="fa fa-heart-o icon" (click)="save(event)" alt="Save event" aria-hidden="true"></i>
         <i *ngIf="saved" class="fa fa-heart icon" (click)="unSave(event)" alt="Un-save event" aria-hidden="true"></i>
-        <a href="{{getGoogleCalendarUrl(event)}}" target="_blank">
+
+        <a [matMenuTriggerFor]="calendarMenu">
           <i class="fa fa-calendar-plus-o icon color-black" aria-hidden="true"></i>
         </a>
+
+        <mat-menu #calendarMenu="matMenu">
+          <button mat-menu-item><a href="{{getGoogleCalendarUrl(event)}}" target="_blank">Google Calendar</a></button>
+          <button mat-menu-item><a href="{{getYahooCalendarUrl(event)}}" target="_blank">Yahoo Calendar</a></button>
+        </mat-menu>
       </div>
     </div>
     <div *ngIf="!hideTags && event.tags && event.tags.length" class="tag-wrapper app-flex-row">

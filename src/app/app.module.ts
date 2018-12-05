@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FullCalendarModule } from 'ng-fullcalendar';
 import { AppMaterialModule } from './app.material.module';
 
@@ -57,6 +58,7 @@ const appRoutes: Routes = [
   imports: [
     AppMaterialModule,
     BrowserModule,
+    BrowserAnimationsModule,
     FullCalendarModule,
     RouterModule.forRoot(
       appRoutes,

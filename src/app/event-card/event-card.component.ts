@@ -36,4 +36,8 @@ export class EventCardComponent {
     return this.addToCalendar.getGoogleCalendarUrl(event);
   }
 
+  public getYahooCalendarUrl(event: Event) {
+    return this.addToCalendar.getYahooCalendarUrl(event);
+  }
+
 }
