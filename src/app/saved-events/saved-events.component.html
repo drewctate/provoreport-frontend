@@ -1,6 +1,6 @@
 <span *ngIf="savedEvents.length">
     <app-event-card *ngFor="let event of savedEvents" (unSaveEvent)="unSaveEvent($event)" [saved]="eventsService.isSavedEvent(event)"
-        [event]="event"></app-event-card>
+        [event]="event" [hideTags]="true"></app-event-card>
 </span>
 <span *ngIf="!savedEvents.length">
     <div class="no-favorites">

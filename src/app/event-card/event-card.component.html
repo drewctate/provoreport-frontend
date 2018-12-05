@@ -26,7 +26,7 @@
         </a>
       </div>
     </div>
-    <div *ngIf="event.tags && event.tags.length" class="tag-wrapper app-flex-row">
+    <div *ngIf="!hideTags && event.tags && event.tags.length" class="tag-wrapper app-flex-row">
       <mat-chip-list multiple>
         <mat-chip *ngFor="let tag of event.tags" [selected]="isTagSelected(tag)">{{tag}}</mat-chip>
       </mat-chip-list>
