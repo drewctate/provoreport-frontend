@@ -9,13 +9,18 @@ import { Event } from '../types';
 })
 export class EventCardComponent {
 
-  @Input() event;
-  @Input() saved;
+  @Input() event: Event;
+  @Input() saved: boolean;
+  @Input() selectedTags: string[];
   @Output() saveEvent = new EventEmitter<Event>();
   @Output() unSaveEvent = new EventEmitter<Event>();
 
   constructor(private addToCalendar: AddToCalendarService) {
 
+  }
+
+  public isTagSelected(tag: string) {
+    return this.selectedTags && this.selectedTags.includes(tag);
   }
 
   public save(event: Event) {
