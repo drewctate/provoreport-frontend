@@ -17,7 +17,8 @@ describe('AddToCalendarService', () => {
       url: 'https://calendar.byu.edu/event/fall-2018-reason-hope',
       time: '10:00 AM to 4:00 PM',
       location: 'Wilkinson Student Center',
-      thumbnail: 'https://calendar.byu.edu/sites/default/files/styles/thumbnail/public/Other_600x600.jpg?itok=d4gtvndZ'
+      thumbnail: 'https://calendar.byu.edu/sites/default/files/styles/thumbnail/public/Other_600x600.jpg?itok=d4gtvndZ', \
+      id: 3
     });
 
     expect(calendarURL).toEqual('https://www.google.com/calendar/render?action=TEMPLATE&text=Fall 2018 Reason for Hope&dates=20180704T190000/20180704T210000&details=https://calendar.byu.edu/event/fall-2018-reason-hope&location=Wilkinson Student Center')

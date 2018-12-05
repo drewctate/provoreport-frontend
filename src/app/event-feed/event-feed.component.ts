@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { EventsService } from '../services';
+import { EventsService, EventFiltersService } from '../services';
 import { Event } from '../types';
 
 @Component({
@@ -11,9 +11,16 @@ export class EventFeedComponent {
 
   public events: Event[];
 
-  constructor(private eventsService: EventsService) {
+  constructor(
+    private eventsService: EventsService,
+    private eventFiltersService: EventFiltersService
+  ) {
     eventsService.getEvents()
       .then(events => this.events = events);
+  }
+
+  get selectedTags(): string[] {
+    return this.eventFiltersService.selectedTags;
   }
 
   public saveEvent(event: Event) {

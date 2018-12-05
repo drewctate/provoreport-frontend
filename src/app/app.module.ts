@@ -12,7 +12,9 @@ import { EventFiltersComponent } from './event-filters/event-filters.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 import { SavedEventsComponent } from './saved-events/saved-events.component';
 
-import { AddToCalendarService, EventsService } from './services';
+import { AddToCalendarService, EventsService, EventFiltersService } from './services';
+
+import { EventTagsFilterPipe } from './pipes';
 
 const appRoutes: Routes = [
   {
@@ -40,6 +42,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
+    // Components
     AppComponent,
     EventCalendarComponent,
     EventCardComponent,
@@ -47,6 +50,9 @@ const appRoutes: Routes = [
     EventFiltersComponent,
     MainScreenComponent,
     SavedEventsComponent,
+
+    // Pipes
+    EventTagsFilterPipe
   ],
   imports: [
     AppMaterialModule,
@@ -59,7 +65,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     AddToCalendarService,
-    EventsService
+    EventsService,
+    EventFiltersService
   ],
   bootstrap: [AppComponent]
 })

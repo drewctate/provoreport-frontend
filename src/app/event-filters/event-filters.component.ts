@@ -1,31 +1,37 @@
-import { Component } from '@angular/core';
-import { TagsService } from '../services';
+import { Component, Output, EventEmitter, OnInit, ChangeDetectorRef } from '@angular/core';
+import { TagsService, EventFiltersService } from '../services';
 import { TagInfo } from '../types';
-import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-event-filters',
   templateUrl: './event-filters.component.html',
   styleUrls: ['./event-filters.component.scss']
 })
-export class EventFiltersComponent {
+export class EventFiltersComponent implements OnInit {
+
+  @Output() tagsChanged = new EventEmitter<string[]>();
 
   public tagInfos: TagInfo[];
   public selectedTags: Map<TagInfo, boolean> = new Map();
 
-  get selectedTagsArr(): string[] {
-    return Array.from(this.selectedTags.keys()).map(info => info.tag);
-  }
-
   constructor(
     private cdRef: ChangeDetectorRef,
+    private eventFiltersService: EventFiltersService,
     private tagsService: TagsService
-  ) {
-    this.init();
+  ) { }
+
+  async ngOnInit() {
+    this.tagInfos = await this.tagsService.getAllTags();
+    this.updateFilterService(this.selectedTags);
   }
 
-  private async init() {
-    this.tagInfos = await this.tagsService.getAllTags();
+  private updateFilterService(selectedTags: Map<TagInfo, boolean>) {
+    const selectedTagNames =
+      Array.from(selectedTags.entries())
+        .filter(([_, selected]) => selected)
+        .map(([info, _]) => info.tag);
+
+    this.eventFiltersService.selectedTags = selectedTagNames;
   }
 
   public isTagSelected(tagInfo: TagInfo) {
@@ -39,6 +45,8 @@ export class EventFiltersComponent {
       this.selectedTags.set(tagInfo, true);
     }
     this.cdRef.detectChanges();
+
+    this.updateFilterService(this.selectedTags);
   }
 
 }
