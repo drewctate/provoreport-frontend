@@ -80,6 +80,9 @@ export class EventFiltersComponent implements OnInit {
   private getTagsFromQueryParams() {
     this.route.queryParamMap.pipe(first()).subscribe(params => {
       const tagStr = <string>params.get('tags');
+      if (!tagStr) {
+        return;
+      }
       const tags = tagStr.split(' ');
       const selectedTagInfos = this.tagInfos.filter(tagInfo => tags.includes(tagInfo.tag));
       const mapContructorArg = <ReadonlyArray<[TagInfo, boolean]>><{}>selectedTagInfos.map(tagInfo => [tagInfo, true]);
