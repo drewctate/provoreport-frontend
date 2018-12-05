@@ -27,8 +27,14 @@
         </a>
 
         <mat-menu #calendarMenu="matMenu">
-          <button mat-menu-item><a href="{{getGoogleCalendarUrl(event)}}" target="_blank">Google Calendar</a></button>
-          <button mat-menu-item><a href="{{getYahooCalendarUrl(event)}}" target="_blank">Yahoo Calendar</a></button>
+          <a href="{{getGoogleCalendarUrl(event)}}" class="no-underline" target="_blank"><button mat-menu-item>Google
+              Calendar</button></a>
+          <button mat-menu-item (click)="downloadIcs(event)">ICalendar</button>
+          <button mat-menu-item (click)="downloadIcs(event)">Outlook</button>
+          <a href="{{getYahooCalendarUrl(event)}}" class="no-underline" target="_blank"><button mat-menu-item>Yahoo
+              Calendar</button></a>
+          <a href="{{getMicrosoftCalendarUrl(event)}}" class="no-underline" target="_blank"><button mat-menu-item>Microsoft
+              Calendar</button></a>
         </mat-menu>
       </div>
     </div>

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Event } from '../../types';
 import { CalendarUtils } from './utils';
 
+import saveAs from 'file-saver';
+
 @Injectable({
     providedIn: 'root'
 })
@@ -80,5 +82,44 @@ export class AddToCalendarService {
         yahooCalendarUrl += '&in_loc=' + event.location;
 
         return yahooCalendarUrl;
+    }
+
+    public getMicrosoftCalendarUrl(event: Event) {
+        let microsoftCalendarUrl = 'http://calendar.live.com/calendar/calendar.aspx?rru=addevent';
+        microsoftCalendarUrl += '&summary=' + event.title;
+        microsoftCalendarUrl += '&dtstart=' + event.startDate + '&dtend=' + event.endDate;
+        microsoftCalendarUrl += '&description=' + event.url;
+        microsoftCalendarUrl += '&location=' + event.location;
+
+        return microsoftCalendarUrl;
+    }
+
+
+    public downloadIcs(event: Event) {
+        const fileName = CalendarUtils.getIcsFileName(event.title),
+            icsData = this.getIcsCalendar(event),
+            icsBlob = CalendarUtils.getIcsBlob(icsData);
+
+        saveAs(icsBlob, fileName);
+    }
+
+    private getIcsCalendar(event: Event) {
+        return [
+            'BEGIN:VCALENDAR',
+            'VERSION:2.0',
+            'BEGIN:VEVENT',
+            'CLASS:PUBLIC',
+            'DESCRIPTION:' + CalendarUtils.formatIcsText(event.url, 62),
+            'DTSTART:' + event.startDate,
+            'DTEND:' + event.endDate,
+            'LOCATION:' + CalendarUtils.formatIcsText(event.location, 64),
+            'SUMMARY:' + CalendarUtils.formatIcsText(event.title, 66),
+            'TRANSP:TRANSPARENT',
+            'END:VEVENT',
+            'END:VCALENDAR',
+            'UID:' + CalendarUtils.getUid(),
+            'DTSTAMP:' + CalendarUtils.getTimeCreated(),
+            'PRODID:angular-addtocalendar'
+        ].join('\n');
     }
 }
