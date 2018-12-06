@@ -1,7 +1,18 @@
 <div class="filters border-1">
-  <h3>
-    Filters
-  </h3>
+  <h4>
+    Time
+  </h4>
+  <mat-chip-list multiple>
+    <mat-chip>Today</mat-chip>
+    <mat-chip>This Week</mat-chip>
+    <mat-chip>This Weekend</mat-chip>
+    <mat-chip>Next Week</mat-chip>
+    <mat-chip>Next Weekend</mat-chip>
+  </mat-chip-list>
+  <br>
+  <h4>
+    Topic
+  </h4>
   <mat-chip-list multiple>
     <mat-chip *ngFor="let info of tagInfos" [selected]="isTagSelected(info)" (click)="toggleSelected(info)">{{info.tag}}
       ({{info.count}})</mat-chip>
