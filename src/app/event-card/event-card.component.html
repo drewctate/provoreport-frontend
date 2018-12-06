@@ -7,13 +7,17 @@
       <div class="event-info">
         <h4><a href={{event.url}} target="_blank">{{event.title}}</a></h4>
         <table>
-          <tr *ngIf="event.location">
-            <td>Location:</td>
-            <td>{{event.location}}</td>
+          <tr *ngIf="event.startDate">
+            <td><b>Date:</b></td>
+            <td>{{event.startDate | date : 'EEEE, MMM d, y'}}</td>
           </tr>
           <tr *ngIf="event.time">
-            <td>Time:</td>
+            <td><b>Time:</b></td>
             <td>{{event.time}}</td>
+          </tr>
+          <tr *ngIf="event.location">
+            <td><b>Location:</b></td>
+            <td>{{event.location}}</td>
           </tr>
         </table>
 
