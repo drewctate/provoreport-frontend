@@ -20,6 +20,11 @@ h3 {
     font-size: 16pt;
 }
 
+h3.subtitle {
+    margin-top: -10px;
+    margin-bottom: 35px;
+}
+
 .fc-toolbar {
     h2 {
         font-size: 16pt;
@@ -70,4 +75,8 @@ h3 {
     &:hover, &:visited, &:link, &:active {
         text-decoration: none;
     }
+}
+
+.sticky-favorites {
+    width: 445px !important;
 }

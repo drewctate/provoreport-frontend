@@ -4049,6 +4049,10 @@ ng-fullcalendar@^1.7.1:
     fullcalendar "3.6.1"
     jquery "^3.2.1"
 
+ng2-sticky-kit@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/ng2-sticky-kit/-/ng2-sticky-kit-6.1.0.tgz#86e0e881c7b04472cc57d04d3d5deff05cf9a9ea"
+
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"

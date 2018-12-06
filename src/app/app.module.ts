@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FullCalendarModule } from 'ng-fullcalendar';
+import { StickyModule } from 'ng2-sticky-kit';
 import { AppMaterialModule } from './app.material.module';
 
 import { AppComponent } from './app.component';
@@ -63,7 +64,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       { useHash: true }
-    )
+    ),
+    StickyModule
   ],
   providers: [
     AddToCalendarService,

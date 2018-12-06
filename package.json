@@ -29,6 +29,7 @@
     "fullcalendar": "3.6.1",
     "moment": "^2.22.2",
     "ng-fullcalendar": "^1.7.1",
+    "ng2-sticky-kit": "^6.1.0",
     "rxjs": "~6.2.0",
     "zone.js": "~0.8.26"
   },
