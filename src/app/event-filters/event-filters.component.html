@@ -1,10 +1,13 @@
 <div class="filters border-1">
   <h4>
-    Time
+    Date
   </h4>
+  <app-date-picker-field [placeholder]="'Start Date'" [initialValue]="today" (dateChange)="startDateChanged($event)"></app-date-picker-field>
+  to
+  <app-date-picker-field [placeholder]="'End Date'" [initialValue]="aWeekFromNow"></app-date-picker-field>
   <mat-chip-list multiple>
     <mat-chip>Today</mat-chip>
-    <mat-chip>This Week</mat-chip>
+    <mat-chip [selected]="true">This Week</mat-chip>
     <mat-chip>This Weekend</mat-chip>
     <mat-chip>Next Week</mat-chip>
     <mat-chip>Next Weekend</mat-chip>

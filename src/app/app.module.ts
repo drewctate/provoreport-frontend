@@ -13,6 +13,7 @@ import { EventFeedComponent } from './event-feed/event-feed.component';
 import { EventFiltersComponent } from './event-filters/event-filters.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 import { SavedEventsComponent } from './saved-events/saved-events.component';
+import { DatePickerFieldComponent } from './date-picker-field/date-picker-field.component';
 
 import { AddToCalendarService, EventsService, EventFiltersService } from './services';
 
@@ -46,6 +47,7 @@ const appRoutes: Routes = [
   declarations: [
     // Components
     AppComponent,
+    DatePickerFieldComponent,
     EventCalendarComponent,
     EventCardComponent,
     EventFeedComponent,

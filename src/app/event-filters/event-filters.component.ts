@@ -4,6 +4,8 @@ import { TagInfo } from '../types';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { first } from 'rxjs/operators';
+import * as moment from 'moment';
+import { Moment } from 'moment';
 
 @Component({
   selector: 'app-event-filters',
@@ -13,6 +15,9 @@ import { first } from 'rxjs/operators';
 export class EventFiltersComponent implements OnInit {
 
   @Output() tagsChanged = new EventEmitter<string[]>();
+
+  public today: Moment = moment();
+  public aWeekFromNow: Moment = moment().add(7, 'd');
 
   public tagInfos: TagInfo[];
   public selectedTags: Map<TagInfo, boolean> = new Map();
@@ -89,6 +94,10 @@ export class EventFiltersComponent implements OnInit {
       this.selectedTags = new Map(mapContructorArg);
       this.updateFilterService(this.selectedTags);
     });
+  }
+
+  public startDateChanged(date: Moment) {
+    console.log(date);
   }
 
 }

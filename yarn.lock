@@ -170,6 +170,12 @@
   version "6.1.10"
   resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-6.1.10.tgz#9f87b740befca8bf9a5fb499446425519389f52f"
 
+"@angular/material-moment-adapter@^7.1.1":
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@angular/material-moment-adapter/-/material-moment-adapter-7.1.1.tgz#7d60d5c5e26d02d60a313bc46622fad07f6ac02d"
+  dependencies:
+    tslib "^1.7.1"
+
 "@angular/material@^7.1.1":
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/@angular/material/-/material-7.1.1.tgz#147b7565262e04d504c8dab7317632967a3db02a"

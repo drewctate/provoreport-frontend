@@ -1,0 +1,6 @@
+<mat-form-field>
+  <input matInput [value]="initialValue" (dateChange)="dateChanged($event)" [matDatepicker]="dp" [min]="today"
+    placeholder="{{placeholder}}">
+  <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+  <mat-datepicker #dp></mat-datepicker>
+</mat-form-field>
