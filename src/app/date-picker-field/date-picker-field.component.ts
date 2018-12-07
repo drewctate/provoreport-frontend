@@ -29,7 +29,8 @@ export class DatePickerFieldComponent {
 
   @Output() dateChange = new EventEmitter<moment.Moment>();
 
-  public date = new FormControl(moment());
+  public today: moment.Moment = moment();
+  public date = new FormControl(this.today);
 
   public dateChanged(event: MatDatepickerInputEvent<moment.Moment>) {
     this.dateChange.emit(event.value);
