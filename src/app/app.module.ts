@@ -35,11 +35,11 @@ const appRoutes: Routes = [
       },
       {
         path: 'calendar',
-        component: EventCalendarComponent,
+        redirectTo: 'feed'
       }
     ]
   },
-  { path: '**', redirectTo: '/' }
+  { path: '**', redirectTo: '' }
 ];
 
 

@@ -1,7 +1,9 @@
+@import '../../variables.scss';
+
 .nav {
     overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
+    border: 1px solid $gray-light;
+    background-color: $gray-lighter;
     margin-bottom: 10px;
     height: 52px;
     text-align: center;
@@ -19,24 +21,24 @@
         cursor: pointer;
         padding: 14px 16px;
         transition: 0.3s;
-        width: 50%;
+        width: 100%;
     }
-    
+
     /* Change background color of buttons on hover */
     button:hover {
         background-color: #ddd;
     }
-    
+
     /* Create an active/current tablink class */
     button.active {
-        background-color: #ccc;
+        background-color: $gray-light;
     }
-    
+
     /* Style the tab content */
     .tabcontent {
         display: none;
         padding: 6px 12px;
-        border: 1px solid #ccc;
+        border: 1px solid $gray-light;
         border-top: none;
     }
 }
