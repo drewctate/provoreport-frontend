@@ -14,7 +14,7 @@
   </mat-chip-list>
   <br>
   <h4>
-    Topic
+    Topics
   </h4>
   <mat-chip-list multiple>
     <mat-chip *ngFor="let info of tagInfos" [selected]="isTagSelected(info)" (click)="toggleSelected(info)">{{info.tag}}
