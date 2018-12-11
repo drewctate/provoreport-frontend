@@ -1,11 +1,11 @@
 import { Component, Output, EventEmitter, OnInit, ChangeDetectorRef } from '@angular/core';
 import { TagsService, EventFiltersService } from '../services';
-import { TagInfo } from '../types';
+import { DateRange, TagInfo } from '../types';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DateRangeGenerator } from './date-range';
+import { Moment } from 'moment';
 
 import { first } from 'rxjs/operators';
-import * as moment from 'moment';
-import { Moment } from 'moment';
 
 @Component({
   selector: 'app-event-filters',
@@ -16,8 +16,9 @@ export class EventFiltersComponent implements OnInit {
 
   @Output() tagsChanged = new EventEmitter<string[]>();
 
-  public today: Moment = moment();
-  public aWeekFromNow: Moment = moment().add(7, 'd');
+  public activeDateRange: DateRange;
+  private customDateRange = DateRangeGenerator.getToday();
+  public dateRanges: DateRange[];
 
   public tagInfos: TagInfo[];
   public selectedTags: Map<TagInfo, boolean> = new Map();
@@ -28,14 +29,19 @@ export class EventFiltersComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private tagsService: TagsService
-  ) { }
+  ) {
+    this.initializeDateRanges();
+  }
 
   async ngOnInit() {
     this.tagInfos = await this.tagsService.getAllTags();
     this.updateFilterService(this.selectedTags);
-    // this.selectedTags = this.getTagsFromQueryParams();
     this.getTagsFromQueryParams();
   }
+
+  /*
+   * TAGS
+   */
 
   public isTagSelected(tagInfo: TagInfo) {
     return this.selectedTags.has(tagInfo) && this.selectedTags.get(tagInfo);
@@ -53,11 +59,60 @@ export class EventFiltersComponent implements OnInit {
     this.updateQueryParams(this.selectedTags);
   }
 
-  private getSelectedTagNames(selectedTags: Map<TagInfo, boolean>) {
+  private getSelectedTagNames(selectedTags: Map<TagInfo, boolean>): string[] {
     return Array.from(selectedTags.entries())
       .filter(([_, selected]) => selected)
       .map(([info, _]) => info.tag);
   }
+
+  /*
+  * DATES
+  */
+
+  private initializeDateRanges() {
+    this.activeDateRange = DateRangeGenerator.getThisWeek();
+    this.dateRanges = [
+      DateRangeGenerator.getToday(),
+      this.activeDateRange,
+      DateRangeGenerator.getThisWeekend(),
+      DateRangeGenerator.getNextWeek(),
+      DateRangeGenerator.getNextWeekend(),
+    ];
+  }
+
+  public activateDateRange(range: DateRange) {
+    this.activeDateRange = range;
+  }
+
+  private isRecognizedDateRange(range: DateRange): DateRange | null {
+    const sameArr = this.dateRanges
+      .filter(r => r.end.isSame(range.end, 'day')
+        && r.start.isSame(range.start, 'day'));
+
+    if (sameArr.length) {
+      return sameArr[0];
+    }
+
+    return null;
+  }
+
+  public startDateChanged(date: Moment) {
+    this.customDateRange.start = date;
+    this.customDateRange.end = this.activeDateRange.end;
+    const recognized = this.isRecognizedDateRange(this.customDateRange);
+    this.activeDateRange = recognized || this.customDateRange;
+  }
+
+  public endDateChanged(date: Moment) {
+    this.customDateRange.end = date;
+    this.customDateRange.start = this.activeDateRange.start;
+    const recognized = this.isRecognizedDateRange(this.customDateRange);
+    this.activeDateRange = recognized || this.customDateRange;
+  }
+
+  /*
+  * OTHER
+  */
 
   private updateFilterService(selectedTags: Map<TagInfo, boolean>) {
     this.eventFiltersService.selectedTags = this.getSelectedTagNames(selectedTags);
@@ -94,10 +149,6 @@ export class EventFiltersComponent implements OnInit {
       this.selectedTags = new Map(mapContructorArg);
       this.updateFilterService(this.selectedTags);
     });
-  }
-
-  public startDateChanged(date: Moment) {
-    console.log(date);
   }
 
 }
