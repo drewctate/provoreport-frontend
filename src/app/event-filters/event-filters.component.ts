@@ -40,8 +40,9 @@ export class EventFiltersComponent implements OnInit {
   async ngOnInit() {
     this.tagInfos = await this.tagsService.getAllTags();
     this.updateFilterTags(this.selectedTags);
-    this.getTagsFromQueryParams();
-    await this.initializeDateRanges();
+    await this.getTagsFromQueryParams();
+    const gotRangeFromQueryParams = await this.getDateRangeFromQueryParams();
+    await this.initializeDateRanges(gotRangeFromQueryParams);
   }
 
   /*
@@ -61,12 +62,12 @@ export class EventFiltersComponent implements OnInit {
     this.cdRef.detectChanges();
 
     this.updateFilterTags(this.selectedTags);
-    this.updateQueryParams(this.selectedTags);
+    this.updateTagQueryParam(this.selectedTags);
   }
 
   public clearTagFilters() {
     this.selectedTags.clear();
-    this.updateQueryParams(this.selectedTags);
+    this.updateTagQueryParam(this.selectedTags);
     this.updateFilterTags(this.selectedTags);
   }
 
@@ -80,7 +81,11 @@ export class EventFiltersComponent implements OnInit {
    * DATES
    */
 
-  private initializeDateRanges() {
+  public isDateRangeSelected(range: DateRange) {
+    return DateRangeGenerator.areRangesEqual(range, this.activeDateRange);
+  }
+
+  private initializeDateRanges(gotRangeFromQueryParams: boolean) {
     const weekDateRange = DateRangeGenerator.getThisWeek();
 
     this.dateRanges = [
@@ -91,7 +96,9 @@ export class EventFiltersComponent implements OnInit {
       DateRangeGenerator.getNextWeekend()
     ];
 
-    return this.activateDateRange(weekDateRange);
+    if (!gotRangeFromQueryParams) {
+      return this.activateDateRange(weekDateRange);
+    }
   }
 
   public async activateDateRange(range: DateRange) {
@@ -103,6 +110,8 @@ export class EventFiltersComponent implements OnInit {
     const newTagInfos = this.tagsService.countTagsOnEvents(filteredEvents);
 
     this.tagInfos = newTagInfos;
+
+    this.updateDateRangeQueryParams(range);
   }
 
   private isRecognizedDateRange(range: DateRange): DateRange | null {
@@ -141,7 +150,7 @@ export class EventFiltersComponent implements OnInit {
     );
   }
 
-  private updateQueryParams(selectedTags: Map<string, boolean>) {
+  private updateTagQueryParam(selectedTags: Map<string, boolean>) {
     const selectedTagNames = this.getSelectedTagNames(selectedTags);
     if (selectedTagNames.length === 0) {
       this.router.navigate(['.'], { queryParams: { tags: null } });
@@ -157,24 +166,57 @@ export class EventFiltersComponent implements OnInit {
       }
       return ret;
     }, '');
-    this.router.navigate(['.'], { queryParams: { tags: tagString } });
+    this.router.navigate(['.'], {
+      queryParams: { tags: tagString },
+      queryParamsHandling: 'merge'
+    });
   }
 
-  private getTagsFromQueryParams() {
-    this.route.queryParamMap.pipe(first()).subscribe(params => {
-      const tagStr = <string>params.get('tags');
-      if (!tagStr) {
-        return;
-      }
-      const tags = tagStr.split(' ');
-      const selectedTagInfos = this.tagInfos.filter(tagInfo =>
-        tags.includes(tagInfo.tag)
-      );
-      const mapContructorArg = <ReadonlyArray<[string, boolean]>>(
-        (<{}>selectedTagInfos.map(tagInfo => [tagInfo.tag, true]))
-      );
-      this.selectedTags = new Map(mapContructorArg);
-      this.updateFilterTags(this.selectedTags);
+  private updateDateRangeQueryParams(range: DateRange) {
+    const startDateString = range.start.format('YYYYMMDDThhmmss');
+    const endDateString = range.end.format('YYYYMMDDThhmmss');
+
+    this.router.navigate(['.'], {
+      queryParams: { startDate: startDateString, endDate: endDateString },
+      queryParamsHandling: 'merge'
+    });
+  }
+
+  private getTagsFromQueryParams(): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.route.queryParamMap.pipe(first()).subscribe(params => {
+        const tagStr = <string>params.get('tags');
+        if (!tagStr) {
+          resolve(false);
+          return;
+        }
+        const tags = tagStr.split(' ');
+        const selectedTagInfos = this.tagInfos.filter(tagInfo =>
+          tags.includes(tagInfo.tag)
+        );
+        const mapContructorArg = <ReadonlyArray<[string, boolean]>>(
+          (<{}>selectedTagInfos.map(tagInfo => [tagInfo.tag, true]))
+        );
+        this.selectedTags = new Map(mapContructorArg);
+        this.updateFilterTags(this.selectedTags);
+        resolve(true);
+      });
+    });
+  }
+
+  private getDateRangeFromQueryParams(): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.route.queryParamMap.pipe(first()).subscribe(params => {
+        const startDateStr = <string>params.get('startDate');
+        const endDateStr = <string>params.get('endDate');
+        if (!startDateStr && !endDateStr) {
+          resolve(false);
+          return;
+        }
+        const range = DateRangeGenerator.getDateRangeFromStrings(startDateStr, endDateStr);
+        this.activateDateRange(range)
+          .then(_ => resolve(true));
+      });
     });
   }
 }

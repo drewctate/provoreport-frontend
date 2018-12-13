@@ -1,4 +1,3 @@
-import { Moment } from 'moment';
 import * as moment from 'moment';
 
 import { DateRange } from '../types';
@@ -7,7 +6,7 @@ export class DateRangeGenerator {
     private static readonly MONDAY = 1;
     private static readonly FRIDAY = 5;
     private static readonly SUNDAY = 7;
-    private static get TODAY() { return moment(); }
+    private static get TODAY() { return moment().startOf('day'); }
 
     static getToday(): DateRange {
         return {
@@ -56,6 +55,19 @@ export class DateRangeGenerator {
             start: nextFriday,
             end: nextSunday
         };
+    }
+
+    static getDateRangeFromStrings(startDateStr?: string, endDateStr?: string): DateRange {
+        const startDate = startDateStr ? moment(startDateStr) : this.TODAY;
+        const endDate = endDateStr ? moment(endDateStr) : this.TODAY;
+        return {
+            start: startDate,
+            end: endDate
+        };
+    }
+
+    static areRangesEqual(r1: DateRange, r2: DateRange) {
+        return r1.start.isSame(r2.start, 'day') && r1.end.isSame(r2.end, 'day');
     }
 
 }
