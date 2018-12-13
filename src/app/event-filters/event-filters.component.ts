@@ -64,6 +64,12 @@ export class EventFiltersComponent implements OnInit {
     this.updateQueryParams(this.selectedTags);
   }
 
+  public clearTagFilters() {
+    this.selectedTags.clear();
+    this.updateQueryParams(this.selectedTags);
+    this.updateFilterTags(this.selectedTags);
+  }
+
   private getSelectedTagNames(selectedTags: Map<string, boolean>): string[] {
     return Array.from(selectedTags.entries())
       .filter(([_, selected]) => selected)
