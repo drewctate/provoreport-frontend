@@ -1,4 +1,10 @@
-import { Component, Output, EventEmitter, OnInit, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  OnInit,
+  ChangeDetectorRef
+} from '@angular/core';
 import { TagsService, EventFiltersService } from '../services';
 import { DateRange, TagInfo } from '../types';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -13,15 +19,14 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./event-filters.component.scss']
 })
 export class EventFiltersComponent implements OnInit {
-
   @Output() tagsChanged = new EventEmitter<string[]>();
 
-  public activeDateRange: DateRange;
+  public activeDateRange: DateRange = DateRangeGenerator.getThisWeek();
   private customDateRange = DateRangeGenerator.getToday();
   public dateRanges: DateRange[];
 
   public tagInfos: TagInfo[];
-  public selectedTags: Map<TagInfo, boolean> = new Map();
+  public selectedTags: Map<string, boolean> = new Map();
 
   constructor(
     private cdRef: ChangeDetectorRef,
@@ -30,13 +35,13 @@ export class EventFiltersComponent implements OnInit {
     private router: Router,
     private tagsService: TagsService
   ) {
-    this.initializeDateRanges();
   }
 
   async ngOnInit() {
     this.tagInfos = await this.tagsService.getAllTags();
-    this.updateFilterService(this.selectedTags);
+    this.updateFilterTags(this.selectedTags);
     this.getTagsFromQueryParams();
+    await this.initializeDateRanges();
   }
 
   /*
@@ -44,50 +49,60 @@ export class EventFiltersComponent implements OnInit {
    */
 
   public isTagSelected(tagInfo: TagInfo) {
-    return this.selectedTags.has(tagInfo) && this.selectedTags.get(tagInfo);
+    return this.selectedTags.has(tagInfo.tag) && this.selectedTags.get(tagInfo.tag);
   }
 
   public toggleSelected(tagInfo: TagInfo) {
     if (this.isTagSelected(tagInfo)) {
-      this.selectedTags.set(tagInfo, false);
+      this.selectedTags.set(tagInfo.tag, false);
     } else {
-      this.selectedTags.set(tagInfo, true);
+      this.selectedTags.set(tagInfo.tag, true);
     }
     this.cdRef.detectChanges();
 
-    this.updateFilterService(this.selectedTags);
+    this.updateFilterTags(this.selectedTags);
     this.updateQueryParams(this.selectedTags);
   }
 
-  private getSelectedTagNames(selectedTags: Map<TagInfo, boolean>): string[] {
+  private getSelectedTagNames(selectedTags: Map<string, boolean>): string[] {
     return Array.from(selectedTags.entries())
       .filter(([_, selected]) => selected)
-      .map(([info, _]) => info.tag);
+      .map(([tagName, _]) => tagName);
   }
 
   /*
-  * DATES
-  */
+   * DATES
+   */
 
   private initializeDateRanges() {
-    this.activeDateRange = DateRangeGenerator.getThisWeek();
+    const weekDateRange = DateRangeGenerator.getThisWeek();
+
     this.dateRanges = [
       DateRangeGenerator.getToday(),
-      this.activeDateRange,
+      weekDateRange,
       DateRangeGenerator.getThisWeekend(),
       DateRangeGenerator.getNextWeek(),
-      DateRangeGenerator.getNextWeekend(),
+      DateRangeGenerator.getNextWeekend()
     ];
+
+    return this.activateDateRange(weekDateRange);
   }
 
-  public activateDateRange(range: DateRange) {
+  public async activateDateRange(range: DateRange) {
     this.activeDateRange = range;
+    const filteredEvents = await this.eventFiltersService.filterEventsByDate(
+      range
+    );
+
+    const newTagInfos = this.tagsService.countTagsOnEvents(filteredEvents);
+
+    this.tagInfos = newTagInfos;
   }
 
   private isRecognizedDateRange(range: DateRange): DateRange | null {
-    const sameArr = this.dateRanges
-      .filter(r => r.end.isSame(range.end, 'day')
-        && r.start.isSame(range.start, 'day'));
+    const sameArr = this.dateRanges.filter(
+      r => r.end.isSame(range.end, 'day') && r.start.isSame(range.start, 'day')
+    );
 
     if (sameArr.length) {
       return sameArr[0];
@@ -111,14 +126,16 @@ export class EventFiltersComponent implements OnInit {
   }
 
   /*
-  * OTHER
-  */
+   * OTHER
+   */
 
-  private updateFilterService(selectedTags: Map<TagInfo, boolean>) {
-    this.eventFiltersService.selectedTags = this.getSelectedTagNames(selectedTags);
+  private updateFilterTags(selectedTags: Map<string, boolean>) {
+    this.eventFiltersService.selectedTags = this.getSelectedTagNames(
+      selectedTags
+    );
   }
 
-  private updateQueryParams(selectedTags: Map<TagInfo, boolean>) {
+  private updateQueryParams(selectedTags: Map<string, boolean>) {
     const selectedTagNames = this.getSelectedTagNames(selectedTags);
     if (selectedTagNames.length === 0) {
       this.router.navigate(['.'], { queryParams: { tags: null } });
@@ -144,11 +161,14 @@ export class EventFiltersComponent implements OnInit {
         return;
       }
       const tags = tagStr.split(' ');
-      const selectedTagInfos = this.tagInfos.filter(tagInfo => tags.includes(tagInfo.tag));
-      const mapContructorArg = <ReadonlyArray<[TagInfo, boolean]>><{}>selectedTagInfos.map(tagInfo => [tagInfo, true]);
+      const selectedTagInfos = this.tagInfos.filter(tagInfo =>
+        tags.includes(tagInfo.tag)
+      );
+      const mapContructorArg = <ReadonlyArray<[string, boolean]>>(
+        (<{}>selectedTagInfos.map(tagInfo => [tagInfo.tag, true]))
+      );
       this.selectedTags = new Map(mapContructorArg);
-      this.updateFilterService(this.selectedTags);
+      this.updateFilterTags(this.selectedTags);
     });
   }
-
 }

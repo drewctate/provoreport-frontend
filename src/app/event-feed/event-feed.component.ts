@@ -9,15 +9,10 @@ import { Event } from '../types';
 })
 export class EventFeedComponent {
 
-  public events: Event[];
-
   constructor(
     private eventsService: EventsService,
     private eventFiltersService: EventFiltersService
-  ) {
-    eventsService.getEvents()
-      .then(events => this.events = events);
-  }
+  ) { }
 
   get selectedTags(): string[] {
     return this.eventFiltersService.selectedTags;

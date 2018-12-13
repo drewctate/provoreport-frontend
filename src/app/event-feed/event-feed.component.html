@@ -1,2 +1,3 @@
-<app-event-card *ngFor="let event of events | eventTagsFilter : selectedTags" (saveEvent)="saveEvent($event)"
-    (unSaveEvent)="unSaveEvent($event)" [saved]="isEventSaved(event)" [event]="event" [selectedTags]="selectedTags"></app-event-card>
+<app-event-card *ngFor="let event of eventFiltersService.filteredByDateEvents | eventTagsFilter : selectedTags"
+    (saveEvent)="saveEvent($event)" (unSaveEvent)="unSaveEvent($event)" [saved]="isEventSaved(event)" [event]="event"
+    [selectedTags]="selectedTags"></app-event-card>
