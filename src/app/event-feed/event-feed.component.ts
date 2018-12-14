@@ -11,7 +11,7 @@ export class EventFeedComponent {
 
   constructor(
     private eventsService: EventsService,
-    private eventFiltersService: EventFiltersService
+    public eventFiltersService: EventFiltersService
   ) { }
 
   get selectedTags(): string[] {
