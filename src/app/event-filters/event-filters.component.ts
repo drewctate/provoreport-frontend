@@ -111,7 +111,18 @@ export class EventFiltersComponent implements OnInit {
 
     this.tagInfos = newTagInfos;
 
-    this.updateDateRangeQueryParams(range);
+    for (const tagName of Array.from(this.selectedTags.keys())) {
+      const tagInfoWithThatName = this.tagInfos.find(info => info.tag === tagName);
+      if (!tagInfoWithThatName) {
+        this.selectedTags.set(tagName, false);
+      }
+    }
+
+    this.updateFilterTags(this.selectedTags);
+    this.updateTagQueryParam(this.selectedTags)
+      .then(_ => {
+        this.updateDateRangeQueryParams(range);
+      });
   }
 
   private isRecognizedDateRange(range: DateRange): DateRange | null {
@@ -153,11 +164,10 @@ export class EventFiltersComponent implements OnInit {
   private updateTagQueryParam(selectedTags: Map<string, boolean>) {
     const selectedTagNames = this.getSelectedTagNames(selectedTags);
     if (selectedTagNames.length === 0) {
-      this.router.navigate(['.'], {
+      return this.router.navigate(['.'], {
         queryParams: { tags: null },
         queryParamsHandling: 'merge'
       });
-      return;
     }
 
     const tagString = selectedTagNames.reduce((prev, curr, index) => {
@@ -169,7 +179,7 @@ export class EventFiltersComponent implements OnInit {
       }
       return ret;
     }, '');
-    this.router.navigate(['.'], {
+    return this.router.navigate(['.'], {
       queryParams: { tags: tagString },
       queryParamsHandling: 'merge'
     });
@@ -179,7 +189,7 @@ export class EventFiltersComponent implements OnInit {
     const startDateString = range.start.format('YYYYMMDDThhmmss');
     const endDateString = range.end.format('YYYYMMDDThhmmss');
 
-    this.router.navigate(['.'], {
+    return this.router.navigate(['.'], {
       queryParams: { startDate: startDateString, endDate: endDateString },
       queryParamsHandling: 'merge'
     });
