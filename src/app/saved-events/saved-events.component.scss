@@ -1,4 +1,11 @@
-.no-favorites {
-    padding: 20px;
-    text-align: center;
+@import "../../variables.scss";
+
+.scroll-container {
+    overflow: scroll;
+    max-height: 70vh;
+
+    .no-favorites {
+        padding: 20px;
+        text-align: center;
+    }
 }

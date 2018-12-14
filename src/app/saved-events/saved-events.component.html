@@ -1,9 +1,12 @@
-<span *ngIf="savedEvents.length">
-    <app-event-card *ngFor="let event of savedEvents" (unSaveEvent)="unSaveEvent($event)" [saved]="eventsService.isSavedEvent(event)"
-        [event]="event" [hideTags]="true"></app-event-card>
-</span>
-<span *ngIf="!savedEvents.length">
-    <div class="no-favorites">
-        <h4>Favorited Events Will Appear Here...</h4>
-    </div>
-</span>
+<div class="scroll-container border-1">
+    <span *ngIf="savedEvents.length">
+        <app-event-card *ngFor="let event of savedEvents.slice().reverse(); let i = index" (unSaveEvent)="unSaveEvent($event)"
+            [saved]="eventsService.isSavedEvent(event)" [event]="event" [noMargin]="i === savedEvents.length - 1"
+            [hideTags]="true"></app-event-card>
+    </span>
+    <span *ngIf="!savedEvents.length">
+        <div class="no-favorites">
+            <h4>Favorited Events Will Appear Here...</h4>
+        </div>
+    </span>
+</div>
