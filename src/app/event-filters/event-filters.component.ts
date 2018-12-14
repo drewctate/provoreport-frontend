@@ -153,7 +153,10 @@ export class EventFiltersComponent implements OnInit {
   private updateTagQueryParam(selectedTags: Map<string, boolean>) {
     const selectedTagNames = this.getSelectedTagNames(selectedTags);
     if (selectedTagNames.length === 0) {
-      this.router.navigate(['.'], { queryParams: { tags: null } });
+      this.router.navigate(['.'], {
+        queryParams: { tags: null },
+        queryParamsHandling: 'merge'
+      });
       return;
     }
 
