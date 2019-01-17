@@ -1,7 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DynamoInterceptor } from './interceptors/dynamo-interceptor';
+
 import { FullCalendarModule } from 'ng-fullcalendar';
 import { StickyModule } from 'ng2-sticky-kit';
 import { AppMaterialModule } from './app.material.module';
@@ -63,6 +66,7 @@ const appRoutes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     FullCalendarModule,
+    HttpClientModule,
     RouterModule.forRoot(
       appRoutes,
       { useHash: true }
@@ -72,7 +76,8 @@ const appRoutes: Routes = [
   providers: [
     AddToCalendarService,
     EventsService,
-    EventFiltersService
+    EventFiltersService,
+    { provide: HTTP_INTERCEPTORS, useClass: DynamoInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
