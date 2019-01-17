@@ -7,6 +7,9 @@ import { Event } from 'src/app/types';
 export class EventTagsFilterPipe implements PipeTransform {
 
   transform(events: Event[], selectedTags: string[]): any {
+    if (!events) {
+      return;
+    }
     if (!selectedTags || selectedTags.length === 0) {
       return events;
     }
