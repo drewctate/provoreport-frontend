@@ -13,7 +13,8 @@
     Topics (<a (click)="clearTagFilters()">Clear All</a>)
   </h4>
   <mat-chip-list multiple>
-    <mat-chip *ngFor="let info of tagInfos" [selected]="isTagSelected(info)" (click)="toggleSelected(info)">{{info.tag}}
+    <mat-chip *ngFor="let info of tagInfos" [selected]="isTagSelected(info)" (click)="toggleSelected(info)">{{info.tag
+      | decodeHtmlString | titlecase}}
       ({{info.count}})</mat-chip>
   </mat-chip-list>
 </div>

@@ -20,7 +20,7 @@ import { DatePickerFieldComponent } from './date-picker-field/date-picker-field.
 
 import { AddToCalendarService, EventsService, EventFiltersService } from './services';
 
-import { EventTagsFilterPipe } from './pipes';
+import { EventTagsFilterPipe, DecodeHtmlString } from './pipes';
 
 const appRoutes: Routes = [
   {
@@ -59,7 +59,8 @@ const appRoutes: Routes = [
     SavedEventsComponent,
 
     // Pipes
-    EventTagsFilterPipe
+    EventTagsFilterPipe,
+    DecodeHtmlString
   ],
   imports: [
     AppMaterialModule,

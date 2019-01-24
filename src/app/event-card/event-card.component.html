@@ -5,15 +5,15 @@
         <img class="thumbnail" src={{event.thumbnail}}>
       </div>
       <div class="event-info">
-        <h4><a href={{event.url}} target="_blank">{{event.title}}</a></h4>
+        <h4><a href={{event.url}} target="_blank">{{event.title | decodeHtmlString}}</a></h4>
         <table>
           <tr *ngIf="event.startDateTime">
             <td><b>Date:</b></td>
             <td>{{event.startDateTime | date : 'EEEE, MMM d, y'}}</td>
           </tr>
-          <tr *ngIf="event.time">
+          <tr *ngIf="event.startDateTime">
             <td><b>Time:</b></td>
-            <td>{{event.time}}</td>
+            <td>{{event.startDateTime | date : 'mediumTime'}}</td>
           </tr>
           <tr *ngIf="event.location">
             <td><b>Location:</b></td>
@@ -44,7 +44,8 @@
     </div>
     <div *ngIf="!hideTags && event.tags && event.tags.length" class="tag-wrapper app-flex-row">
       <mat-chip-list multiple>
-        <mat-chip *ngFor="let tag of event.tags" [selected]="isTagSelected(tag)">{{tag}}</mat-chip>
+        <mat-chip *ngFor="let tag of event.tags" [selected]="isTagSelected(tag)" [innerHTML]='tag
+        | titlecase'></mat-chip>
       </mat-chip-list>
     </div>
   </div>
