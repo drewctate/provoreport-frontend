@@ -15,9 +15,9 @@ export class CalendarUtils {
     /**
      * Gets the duration between dates.
      */
-    static getHoursDuration(startDate: string, endDate: string, timezone?: number): string {
-        const start = moment(startDate);
-        const end = moment(endDate);
+    static getHoursDuration(startDateTime: string, endDateTime: string, timezone?: number): string {
+        const start = moment(startDateTime);
+        const end = moment(endDateTime);
 
         if (timezone) {
             start.utcOffset(timezone);

@@ -1,11 +1,13 @@
 export interface Event {
     id: string;
     title: string;
+    description: string;
     url: string;
-    time?: string;
-    startDate: string;
-    endDate: string;
-    location?: string;
+    location: string;
+    ticketsUrl: string;
+    startDateTime: string;
+    endDateTime: string;
     thumbnail: string;
-    tags: string[];
+    past: string;
+    tags: Array<string>;
 }

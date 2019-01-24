@@ -7,9 +7,9 @@
       <div class="event-info">
         <h4><a href={{event.url}} target="_blank">{{event.title}}</a></h4>
         <table>
-          <tr *ngIf="event.startDate">
+          <tr *ngIf="event.startDateTime">
             <td><b>Date:</b></td>
-            <td>{{event.startDate | date : 'EEEE, MMM d, y'}}</td>
+            <td>{{event.startDateTime | date : 'EEEE, MMM d, y'}}</td>
           </tr>
           <tr *ngIf="event.time">
             <td><b>Time:</b></td>

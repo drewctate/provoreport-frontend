@@ -2,9 +2,9 @@
   <h4>
     Date
   </h4>
-  <app-date-picker-field [placeholder]="'Start Date'" [initialValue]="activeDateRange.start" (dateChange)="startDateChanged($event)"></app-date-picker-field>
+  <app-date-picker-field [placeholder]="'Start Date'" [initialValue]="activeDateRange.start" (dateChange)="startDateTimeChanged($event)"></app-date-picker-field>
   to
-  <app-date-picker-field [placeholder]="'End Date'" [initialValue]="activeDateRange.end" (dateChange)="endDateChanged($event)"></app-date-picker-field>
+  <app-date-picker-field [placeholder]="'End Date'" [initialValue]="activeDateRange.end" (dateChange)="endDateTimeChanged($event)"></app-date-picker-field>
   <mat-chip-list multiple>
     <mat-chip *ngFor="let range of dateRanges" [selected]="isDateRangeSelected(range)" (click)="activateDateRange(range)">{{range.name}}</mat-chip>
   </mat-chip-list>

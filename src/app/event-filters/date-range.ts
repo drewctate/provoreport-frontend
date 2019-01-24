@@ -57,12 +57,12 @@ export class DateRangeGenerator {
         };
     }
 
-    static getDateRangeFromStrings(startDateStr?: string, endDateStr?: string): DateRange {
-        const startDate = startDateStr ? moment(startDateStr) : this.TODAY;
-        const endDate = endDateStr ? moment(endDateStr) : this.TODAY;
+    static getDateRangeFromStrings(startDateTimeStr?: string, endDateTimeStr?: string): DateRange {
+        const startDateTime = startDateTimeStr ? moment(startDateTimeStr) : this.TODAY;
+        const endDateTime = endDateTimeStr ? moment(endDateTimeStr) : this.TODAY;
         return {
-            start: startDate,
-            end: endDate
+            start: startDateTime,
+            end: endDateTime
         };
     }
 

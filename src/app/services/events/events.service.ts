@@ -33,7 +33,7 @@ export class EventsService {
 
   public getEvents(): Promise<Event[]> {
     return new Promise<Event[]>((resolve, reject) => {
-      this.http.get(`${environment.ROOT_URL}/events`, { params: { startDate: '20190114T190000', endDate: '20200114T190000' } })
+      this.http.get(`${environment.ROOT_URL}/events`, { params: { startDateTime: '20190114T190000', endDateTime: '20200114T190000' } })
         .subscribe((events: Event[]) => {
           resolve(events);
         });

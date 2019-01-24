@@ -30,8 +30,8 @@ export class EventFiltersService {
   public async filterEventsByDate(range: DateRange) {
     const allEvents = await this.eventsService.getEvents();
     this._filteredByDateEvents = allEvents.filter(event => {
-      return moment(event.startDate).isSameOrAfter(range.start, 'day')
-        && moment(event.endDate).isSameOrBefore(range.end, 'day');
+      return moment(event.startDateTime).isSameOrAfter(range.start, 'day')
+        && moment(event.endDateTime).isSameOrBefore(range.end, 'day');
     });
     return this._filteredByDateEvents;
   }

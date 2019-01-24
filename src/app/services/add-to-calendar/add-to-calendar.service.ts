@@ -63,7 +63,7 @@ export class AddToCalendarService {
     public getGoogleCalendarUrl(event: Event) {
         let googleCalendarUrl = 'https://www.google.com/calendar/render?action=TEMPLATE'
         googleCalendarUrl += `&text=${event.title}`;
-        googleCalendarUrl += `&dates=${event.startDate}/${event.endDate}`;
+        googleCalendarUrl += `&dates=${event.startDateTime}/${event.endDateTime}`;
         googleCalendarUrl += `&details=${event.url}`;
         if (event.location) {
             googleCalendarUrl += `&location=${event.location}`;
@@ -74,10 +74,10 @@ export class AddToCalendarService {
 
     public getYahooCalendarUrl(event: Event) {
         let yahooCalendarUrl = 'http://calendar.yahoo.com/?v=60&view=d&type=20';
-        const duration = CalendarUtils.getHoursDuration(event.startDate, event.endDate);
+        const duration = CalendarUtils.getHoursDuration(event.startDateTime, event.endDateTime);
 
         yahooCalendarUrl += '&TITLE=' + event.title;
-        yahooCalendarUrl += '&ST=' + event.startDate + '&DUR=' + duration;
+        yahooCalendarUrl += '&ST=' + event.startDateTime + '&DUR=' + duration;
         yahooCalendarUrl += '&DESC=' + event.url;
         yahooCalendarUrl += '&in_loc=' + event.location;
 
@@ -87,7 +87,7 @@ export class AddToCalendarService {
     public getMicrosoftCalendarUrl(event: Event) {
         let microsoftCalendarUrl = 'http://calendar.live.com/calendar/calendar.aspx?rru=addevent';
         microsoftCalendarUrl += '&summary=' + event.title;
-        microsoftCalendarUrl += '&dtstart=' + event.startDate + '&dtend=' + event.endDate;
+        microsoftCalendarUrl += '&dtstart=' + event.startDateTime + '&dtend=' + event.endDateTime;
         microsoftCalendarUrl += '&description=' + event.url;
         microsoftCalendarUrl += '&location=' + event.location;
 
@@ -110,8 +110,8 @@ export class AddToCalendarService {
             'BEGIN:VEVENT',
             'CLASS:PUBLIC',
             'DESCRIPTION:' + CalendarUtils.formatIcsText(event.url, 62),
-            'DTSTART:' + event.startDate,
-            'DTEND:' + event.endDate,
+            'DTSTART:' + event.startDateTime,
+            'DTEND:' + event.endDateTime,
             'LOCATION:' + CalendarUtils.formatIcsText(event.location, 64),
             'SUMMARY:' + CalendarUtils.formatIcsText(event.title, 66),
             'TRANSP:TRANSPARENT',

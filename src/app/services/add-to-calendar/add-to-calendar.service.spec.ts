@@ -15,12 +15,14 @@ describe('AddToCalendarService', () => {
     const calendarURL = service.getGoogleCalendarUrl({
       title: 'Fall 2018 Reason for Hope',
       url: 'https://calendar.byu.edu/event/fall-2018-reason-hope',
-      time: '10:00 AM to 4:00 PM',
+      ticketsUrl: 'none',
+      description: 'none',
       location: 'Wilkinson Student Center',
-      startDate: '20190114T190000',
-      endDate: '20190114T190000',
+      startDateTime: '20190114T190000',
+      endDateTime: '20190114T190000',
       thumbnail: 'https://calendar.byu.edu/sites/default/files/styles/thumbnail/public/Other_600x600.jpg?itok=d4gtvndZ',
       id: '',
+      past: '',
       tags: []
     });
 

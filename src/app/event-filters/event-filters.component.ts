@@ -137,14 +137,14 @@ export class EventFiltersComponent implements OnInit {
     return null;
   }
 
-  public startDateChanged(date: Moment) {
+  public startDateTimeChanged(date: Moment) {
     this.customDateRange.start = date;
     this.customDateRange.end = this.activeDateRange.end;
     const recognized = this.isRecognizedDateRange(this.customDateRange);
     this.activeDateRange = recognized || this.customDateRange;
   }
 
-  public endDateChanged(date: Moment) {
+  public endDateTimeChanged(date: Moment) {
     this.customDateRange.end = date;
     this.customDateRange.start = this.activeDateRange.start;
     const recognized = this.isRecognizedDateRange(this.customDateRange);
@@ -186,11 +186,11 @@ export class EventFiltersComponent implements OnInit {
   }
 
   private updateDateRangeQueryParams(range: DateRange) {
-    const startDateString = range.start.format('YYYYMMDDThhmmss');
-    const endDateString = range.end.format('YYYYMMDDThhmmss');
+    const startDateTimeString = range.start.format('YYYYMMDDThhmmss');
+    const endDateTimeString = range.end.format('YYYYMMDDThhmmss');
 
     return this.router.navigate(['.'], {
-      queryParams: { startDate: startDateString, endDate: endDateString },
+      queryParams: { startDateTime: startDateTimeString, endDateTime: endDateTimeString },
       queryParamsHandling: 'merge'
     });
   }
@@ -220,13 +220,13 @@ export class EventFiltersComponent implements OnInit {
   private getDateRangeFromQueryParams(): Promise<boolean> {
     return new Promise((resolve) => {
       this.route.queryParamMap.pipe(first()).subscribe(params => {
-        const startDateStr = <string>params.get('startDate');
-        const endDateStr = <string>params.get('endDate');
-        if (!startDateStr && !endDateStr) {
+        const startDateTimeStr = <string>params.get('startDateTime');
+        const endDateTimeStr = <string>params.get('endDateTime');
+        if (!startDateTimeStr && !endDateTimeStr) {
           resolve(false);
           return;
         }
-        const range = DateRangeGenerator.getDateRangeFromStrings(startDateStr, endDateStr);
+        const range = DateRangeGenerator.getDateRangeFromStrings(startDateTimeStr, endDateTimeStr);
         this.activateDateRange(range)
           .then(_ => resolve(true));
       });
