@@ -28,6 +28,8 @@ export class EventFiltersComponent implements OnInit {
   public tagInfos: TagInfo[];
   public selectedTags: Map<string, boolean> = new Map();
 
+  private readonly queryStringTagSeparator = ',';
+
   constructor(
     private cdRef: ChangeDetectorRef,
     private eventFiltersService: EventFiltersService,
@@ -175,7 +177,7 @@ export class EventFiltersComponent implements OnInit {
       if (index === 0) {
         ret = curr;
       } else {
-        ret = prev += ' ' + curr;
+        ret = prev += this.queryStringTagSeparator + curr;
       }
       return ret;
     }, '');
@@ -203,7 +205,7 @@ export class EventFiltersComponent implements OnInit {
           resolve(false);
           return;
         }
-        const tags = tagStr.split(' ');
+        const tags = tagStr.split(this.queryStringTagSeparator);
         const selectedTagInfos = this.tagInfos.filter(tagInfo =>
           tags.includes(tagInfo.tag)
         );
