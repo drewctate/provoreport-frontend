@@ -2,11 +2,14 @@
   <h4>
     Date
   </h4>
-  <app-date-picker-field [placeholder]="'Start Date'" [initialValue]="activeDateRange.start" (dateChange)="startDateTimeChanged($event)"></app-date-picker-field>
+  <app-date-picker-field [placeholder]="'Start Date'" [initialValue]="activeDateRange.start"
+    (dateChange)="startDateTimeChanged($event)"></app-date-picker-field>
   to
-  <app-date-picker-field [placeholder]="'End Date'" [initialValue]="activeDateRange.end" (dateChange)="endDateTimeChanged($event)"></app-date-picker-field>
+  <app-date-picker-field [placeholder]="'End Date'" [initialValue]="activeDateRange.end"
+    (dateChange)="endDateTimeChanged($event)"></app-date-picker-field>
   <mat-chip-list multiple>
-    <mat-chip *ngFor="let range of dateRanges" [selected]="isDateRangeSelected(range)" (click)="activateDateRange(range)">{{range.name}}</mat-chip>
+    <mat-chip *ngFor="let range of dateRanges" [selected]="isDateRangeSelected(range)"
+      (click)="activateDateRange(range)">{{range.name}}</mat-chip>
   </mat-chip-list>
   <br>
   <h4>
@@ -14,7 +17,7 @@
   </h4>
   <mat-chip-list multiple>
     <mat-chip *ngFor="let info of tagInfos" [selected]="isTagSelected(info)" (click)="toggleSelected(info)">{{info.tag
-      | decodeHtmlString | titlecase}}
+      | decodeHtmlString | customTitleCase }}
       ({{info.count}})</mat-chip>
   </mat-chip-list>
 </div>
