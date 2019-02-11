@@ -14,7 +14,7 @@
           </tr>
           <tr *ngIf="event.startDateTime">
             <td><b>Time:</b></td>
-            <td>{{event.startDateTime | date : 'mediumTime'}}</td>
+            <td>{{event.startDateTime | date : 'shortTime'}}</td>
           </tr>
           <tr *ngIf="event.location">
             <td><b>Location:</b></td>
