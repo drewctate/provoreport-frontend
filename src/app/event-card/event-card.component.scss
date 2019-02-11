@@ -1,3 +1,4 @@
+@import '../../variables.scss';
 /* Add some padding inside the card container */
 .container {
     padding: 5px 16px;
@@ -26,9 +27,24 @@
         }
     }
 
-    .thumbnail {
-        height: 120px;
-        width: auto;
+    .thumbnail-container {
+        width: 130px;
+        height: 105px;
+        white-space: nowrap;
+        text-align: center; margin: 1em 0;
+        background-color: $gray-lighter;
+
+        .helper {
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        .thumbnail {
+            max-height: 105px;
+            max-width: 130px;
+            vertical-align: middle;
+        }
     }
 
     .tag-wrapper {

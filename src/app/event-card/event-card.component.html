@@ -1,8 +1,10 @@
 <div class="card border-1" [ngClass]="{'margin-bottom': !noMargin}">
   <div class="app-flex-column container">
     <div class="app-flex-row">
-      <div>
-        <img class="thumbnail" src={{event.thumbnail}}>
+      <div class="thumbnail-container">
+        <span class="helper"></span>
+        <img *ngIf="event.thumbnail" class="thumbnail" src={{event.thumbnail}}>
+        <img *ngIf="!event.thumbnail" class="thumbnail" src="assets/no-image.png">
       </div>
       <div class="event-info">
         <h4><a href={{event.url}} (click)="recordView(event)" target="_blank">{{event.title | decodeHtmlString}}</a>
