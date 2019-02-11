@@ -7,7 +7,7 @@ import { DynamoInterceptor } from './interceptors/dynamo-interceptor';
 
 import { FullCalendarModule } from 'ng-fullcalendar';
 import { StickyModule } from 'ng2-sticky-kit';
-import { AppMaterialModule } from './app.material.module';
+import { AppMaterialModule } from './material-config/app.material.module';
 
 import { AppComponent } from './app.component';
 import { EventCalendarComponent } from './event-calendar/event-calendar.component';
@@ -18,7 +18,7 @@ import { MainScreenComponent } from './main-screen/main-screen.component';
 import { SavedEventsComponent } from './saved-events/saved-events.component';
 import { DatePickerFieldComponent } from './date-picker-field/date-picker-field.component';
 
-import { AddToCalendarService, EventsService, EventFiltersService } from './services';
+import { AddToCalendarService, AnalyticsService, EventsService, EventFiltersService } from './services';
 
 import { EventTagsFilterPipe, DecodeHtmlString } from './pipes';
 
@@ -76,6 +76,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     AddToCalendarService,
+    AnalyticsService,
     EventsService,
     EventFiltersService,
     { provide: HTTP_INTERCEPTORS, useClass: DynamoInterceptor, multi: true }

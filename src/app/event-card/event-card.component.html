@@ -5,7 +5,8 @@
         <img class="thumbnail" src={{event.thumbnail}}>
       </div>
       <div class="event-info">
-        <h4><a href={{event.url}} target="_blank">{{event.title | decodeHtmlString}}</a></h4>
+        <h4><a href={{event.url}} (click)="recordView(event)" target="_blank">{{event.title | decodeHtmlString}}</a>
+        </h4>
         <table>
           <tr *ngIf="event.startDateTime">
             <td><b>Date:</b></td>
@@ -37,7 +38,8 @@
           <button mat-menu-item (click)="downloadIcs(event)">Outlook</button>
           <a href="{{getYahooCalendarUrl(event)}}" class="no-underline" target="_blank"><button mat-menu-item>Yahoo
               Calendar</button></a>
-          <a href="{{getMicrosoftCalendarUrl(event)}}" class="no-underline" target="_blank"><button mat-menu-item>Microsoft
+          <a href="{{getMicrosoftCalendarUrl(event)}}" class="no-underline" target="_blank"><button
+              mat-menu-item>Microsoft
               Calendar</button></a>
         </mat-menu>
       </div>

@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { AddToCalendarService } from '../services';
+import { AddToCalendarService, AnalyticsService } from '../services';
 import { Event } from '../types';
 
 @Component({
@@ -17,7 +17,7 @@ export class EventCardComponent {
   @Output() saveEvent = new EventEmitter<Event>();
   @Output() unSaveEvent = new EventEmitter<Event>();
 
-  constructor(private addToCalendar: AddToCalendarService) {
+  constructor(private addToCalendar: AddToCalendarService, private analytics: AnalyticsService) {
 
   }
 
@@ -26,11 +26,17 @@ export class EventCardComponent {
   }
 
   public save(event: Event) {
+    this.analytics.recordEventLike(event);
     this.saveEvent.emit(event);
   }
 
   public unSave(event: Event) {
+    this.analytics.recordEventUnlike(event);
     this.unSaveEvent.emit(event);
+  }
+
+  public recordView(event: Event) {
+    this.analytics.recordEventLinkClicked(event);
   }
 
   public getGoogleCalendarUrl(event: Event) {
