@@ -6,10 +6,11 @@ import {
   ChangeDetectorRef
 } from '@angular/core';
 import { TagsService, EventFiltersService } from '../services';
-import { DateRange, TagInfo } from '../types';
+import { DateRange, TagInfo, Event } from '../types';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DateRangeGenerator } from './date-range';
 import { Moment } from 'moment';
+import { environment } from '../../environments/environment';
 
 import { first } from 'rxjs/operators';
 
@@ -23,6 +24,11 @@ export class EventFiltersComponent implements OnInit {
 
   public activeDateRange: DateRange = DateRangeGenerator.getThisWeek();
   private customDateRange = DateRangeGenerator.getToday();
+  private searchString = '';
+  private searchTimeout = null;
+  private searchDebounceLength = 300;
+  public maxQueryLength = environment.fuseOptions.maxPatternLength;
+
   public dateRanges: DateRange[];
 
   public tagInfos: TagInfo[];
@@ -79,8 +85,34 @@ export class EventFiltersComponent implements OnInit {
       .map(([tagName, _]) => tagName);
   }
 
+  /**
+   * Updates the available tags after a filter operation. Some tags
+   * may not exist in the new filtered list. If they don't, they are
+   * removed from the filter service and the query params.
+   * @param filteredEvents The new list of filtered events.
+   * @param range The currently active date range (for updating the query params)
+   */
+  private updateTagsAfterFilter(filteredEvents: Event[], range: DateRange) {
+    const newTagInfos = this.tagsService.countTagsOnEvents(filteredEvents);
+
+    this.tagInfos = newTagInfos;
+
+    for (const tagName of Array.from(this.selectedTags.keys())) {
+      const tagInfoWithThatName = this.tagInfos.find(info => info.tag === tagName);
+      if (!tagInfoWithThatName) {
+        this.selectedTags.set(tagName, false);
+      }
+    }
+
+    this.updateFilterTags(this.selectedTags);
+    this.updateTagQueryParam(this.selectedTags)
+      .then(_ => {
+        this.updateDateRangeQueryParams(range);
+      });
+  }
+
   /*
-   * DATES
+   * DATES and SEARCH
    */
 
   public isDateRangeSelected(range: DateRange) {
@@ -103,29 +135,39 @@ export class EventFiltersComponent implements OnInit {
     }
   }
 
+  public debouncedSearch(searchString: string) {
+    clearTimeout(this.searchTimeout);
+    this.searchTimeout = setTimeout(() => {
+      this.filterBySearchString(searchString);
+    }, this.searchDebounceLength);
+  }
+
+  /**
+   * Activates a new date range, applies the current search string
+   * and updates the tags. Currently triggers an event refresh
+   * @param range The range to filter by.
+   */
   public async activateDateRange(range: DateRange) {
     this.activeDateRange = range;
-    const filteredEvents = await this.eventFiltersService.filterEventsByDate(
-      range
+    const filteredEvents = await this.eventFiltersService.filterEvents(
+      range, this.searchString
     );
-
-    const newTagInfos = this.tagsService.countTagsOnEvents(filteredEvents);
-
-    this.tagInfos = newTagInfos;
-
-    for (const tagName of Array.from(this.selectedTags.keys())) {
-      const tagInfoWithThatName = this.tagInfos.find(info => info.tag === tagName);
-      if (!tagInfoWithThatName) {
-        this.selectedTags.set(tagName, false);
-      }
-    }
-
-    this.updateFilterTags(this.selectedTags);
-    this.updateTagQueryParam(this.selectedTags)
-      .then(_ => {
-        this.updateDateRangeQueryParams(range);
-      });
+    this.updateTagsAfterFilter(filteredEvents, range);
   }
+
+  /**
+   * Filters by search string
+   * and updates the tags.
+   * @param range The range to filter by.
+   */
+  public filterBySearchString(searchString: string) {
+    this.searchString = searchString;
+    const filteredEvents = this.eventFiltersService.filterEventsOnlyBySearchString(
+      searchString
+    );
+    this.updateTagsAfterFilter(filteredEvents, this.activeDateRange);
+  }
+
 
   private isRecognizedDateRange(range: DateRange): DateRange | null {
     const sameArr = this.dateRanges.filter(

@@ -29,6 +29,7 @@
     "file-saver": "^2.0.0",
     "font-awesome": "^4.7.0",
     "fullcalendar": "3.6.1",
+    "fuse.js": "^3.4.2",
     "moment": "^2.22.2",
     "ng-fullcalendar": "^1.7.1",
     "ng2-sticky-kit": "^6.1.0",

@@ -1,5 +1,12 @@
 <div class="filters border-1">
   <h4>
+    Filter
+  </h4>
+  <mat-form-field>
+    <input matInput placeholder="Your keywords go here..." (keyup)="debouncedSearch($event.target.value)"
+      [maxLength]="maxQueryLength">
+  </mat-form-field>
+  <h4>
     Date
   </h4>
   <app-date-picker-field [placeholder]="'Start Date'" [initialValue]="activeDateRange.start"
