@@ -85,3 +85,16 @@ h3.subtitle {
 .sticky-favorites {
     width: 445px !important;
 }
+
+.nav {
+    overflow: hidden;
+    border: 1px solid $gray-light;
+    background-color: $gray-lighter;
+    margin-bottom: 10px;
+    height: 52px;
+    text-align: center;
+
+    h3 {
+        margin-top: 10px;
+    }
+}

@@ -1,17 +1,6 @@
 @import '../../variables.scss';
 
 .nav {
-    overflow: hidden;
-    border: 1px solid $gray-light;
-    background-color: $gray-lighter;
-    margin-bottom: 10px;
-    height: 52px;
-    text-align: center;
-
-    h3 {
-        margin-top: 10px;
-    }
-
     /* Style the buttons that are used to open the tab content */
     button {
         background-color: inherit;

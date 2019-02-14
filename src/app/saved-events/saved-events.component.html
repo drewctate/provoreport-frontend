@@ -1,8 +1,14 @@
+<div class="nav">
+    <h3>
+        Favorites
+    </h3>
+    <i *ngIf="savedEvents.length" class="fa fa-share-alt share-icon" aria-hidden="true"></i>
+</div>
 <div class="scroll-container border-1">
     <span *ngIf="savedEvents.length">
-        <app-event-card *ngFor="let event of savedEvents.slice().reverse(); let i = index" (unSaveEvent)="unSaveEvent($event)"
-            [saved]="eventsService.isSavedEvent(event)" [event]="event" [noMargin]="i === savedEvents.length - 1"
-            [hideTags]="true"></app-event-card>
+        <app-event-card *ngFor="let event of savedEvents.slice().reverse(); let i = index"
+            (unSaveEvent)="unSaveEvent($event)" [saved]="eventsService.isSavedEvent(event)" [event]="event"
+            [noMargin]="i === savedEvents.length - 1" [hideTags]="true"></app-event-card>
     </span>
     <span *ngIf="!savedEvents.length">
         <div class="no-favorites">

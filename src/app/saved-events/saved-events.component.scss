@@ -1,5 +1,15 @@
 @import "../../variables.scss";
 
+.nav {
+    .share-icon {
+        position: absolute;
+        top: 12px;
+        right: 28px;
+        font-size: 28px;
+        cursor: pointer;
+    }
+}
+
 .scroll-container {
     overflow-y: auto;
     max-height: 70vh;
