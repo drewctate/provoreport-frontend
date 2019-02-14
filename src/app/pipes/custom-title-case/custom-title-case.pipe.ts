@@ -10,7 +10,8 @@ export class CustomTitleCasePipe implements PipeTransform {
 
   // Mapping of strings to their replacements
   private replaceRules = {
-    'Byu': 'BYU'
+    'Byu': 'BYU',
+    'Fhe': 'FHE'
   };
 
   transform(value: string): any {
