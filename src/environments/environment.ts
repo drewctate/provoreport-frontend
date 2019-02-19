@@ -5,7 +5,8 @@ import { fuseOptions } from './fuse-options';
 
 export const environment = {
   production: false,
-  ROOT_URL: 'https://r1e2zr6ezi.execute-api.us-west-2.amazonaws.com/beta',
+  // ROOT_URL: 'https://r1e2zr6ezi.execute-api.us-west-2.amazonaws.com/beta',
+  ROOT_URL: 'https://vovo5608pl.execute-api.us-west-2.amazonaws.com/dev',
   fuseOptions: fuseOptions
 };
 

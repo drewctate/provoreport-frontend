@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 import { DynamoInterceptor } from './interceptors/dynamo-interceptor';
 
 import { FullCalendarModule } from 'ng-fullcalendar';
@@ -16,11 +17,13 @@ import { EventFeedComponent } from './event-feed/event-feed.component';
 import { EventFiltersComponent } from './event-filters/event-filters.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 import { SavedEventsComponent } from './saved-events/saved-events.component';
+import { ShareDialogueComponent } from './saved-events/share-dialogue/share-dialogue.component';
 import { DatePickerFieldComponent } from './date-picker-field/date-picker-field.component';
 
 import { AddToCalendarService, AnalyticsService, EventsService, EventFiltersService } from './services';
 
 import { EventTagsFilterPipe, DecodeHtmlString, CustomTitleCasePipe } from './pipes';
+import { EmailDialogueComponent } from './saved-events/email-dialogue/email-dialogue/email-dialogue.component';
 
 const appRoutes: Routes = [
   {
@@ -51,17 +54,23 @@ const appRoutes: Routes = [
     // Components
     AppComponent,
     DatePickerFieldComponent,
+    EmailDialogueComponent,
     EventCalendarComponent,
     EventCardComponent,
     EventFeedComponent,
     EventFiltersComponent,
     MainScreenComponent,
     SavedEventsComponent,
+    ShareDialogueComponent,
 
     // Pipes
     EventTagsFilterPipe,
     DecodeHtmlString,
-    CustomTitleCasePipe
+    CustomTitleCasePipe,
+  ],
+  entryComponents: [
+    EmailDialogueComponent,
+    ShareDialogueComponent
   ],
   imports: [
     AppMaterialModule,
@@ -69,6 +78,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     FullCalendarModule,
     HttpClientModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(
       appRoutes,
       { useHash: true }

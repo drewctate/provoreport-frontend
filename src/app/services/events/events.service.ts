@@ -39,4 +39,18 @@ export class EventsService {
         });
     });
   }
+
+  public shareEvents(events: Event[], senderName: string, recipients: string[]): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      const req = {
+        events: events,
+        senderName: senderName,
+        recipients: recipients
+      };
+      this.http.post(`${environment.ROOT_URL}/share`, req)
+        .subscribe(_ => {
+          resolve(true);
+        });
+    });
+  }
 }

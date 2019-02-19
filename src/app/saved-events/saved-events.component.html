@@ -1,8 +1,9 @@
-<div class="nav">
+<div *ngIf="!hideNav" class="nav">
     <h3>
         Favorites
     </h3>
-    <i *ngIf="savedEvents.length" class="fa fa-share-alt share-icon" aria-hidden="true"></i>
+    <i *ngIf="savedEvents.length" (click)="shareSavedEvents(savedEvents)" class="fa fa-share-alt share-icon"
+        aria-hidden="true"></i>
 </div>
 <div class="scroll-container border-1">
     <span *ngIf="savedEvents.length">

@@ -1,0 +1,15 @@
+.fields {
+    display: flex;
+    flex-direction: column;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    .btn {
+        width: 40%;
+        margin: 15px auto 0 auto;
+    }
+}
