@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class EventsService {
 
   private _savedEvents: Map<string, Event> = new Map();
+  private _events: Event[];
 
   constructor(private http: HttpClient) { }
 
@@ -31,10 +32,15 @@ export class EventsService {
     return this._savedEvents.has(event.id);
   }
 
-  public getEvents(): Promise<Event[]> {
-    return new Promise<Event[]>((resolve, reject) => {
+  public getEvents(bypassCache: boolean = false): Promise<Event[]> {
+    if (this._events && !bypassCache) {
+      return Promise.resolve(this._events);
+    }
+
+    return new Promise<Event[]>((resolve) => {
       this.http.get(`${environment.ROOT_URL}/events`, { params: { startDateTime: '20190114T190000', endDateTime: '20200114T190000' } })
         .subscribe((events: Event[]) => {
+          this._events = events;
           resolve(events);
         });
     });
