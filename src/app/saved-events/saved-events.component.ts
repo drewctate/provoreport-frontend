@@ -32,7 +32,7 @@ export class SavedEventsComponent {
     });
     shareDialogRef.afterClosed().subscribe(res => {
       if (res === 'email') {
-        const emailDialogRef = this.dialog.open(EmailDialogueComponent);
+        const emailDialogRef = this.dialog.open(EmailDialogueComponent, { width: '500px' });
         emailDialogRef.afterClosed().subscribe(emailDialogueRes => {
           this.eventsService.shareEvents(events, emailDialogueRes.senderName, emailDialogueRes.recipients);
         });
