@@ -7,7 +7,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DynamoInterceptor } from './interceptors/dynamo-interceptor';
 
 import { FullCalendarModule } from 'ng-fullcalendar';
-import { StickyModule } from 'ng2-sticky-kit';
 import { AppMaterialModule } from './material-config/app.material.module';
 
 import { AppComponent } from './app.component';
@@ -24,6 +23,7 @@ import { AddToCalendarService, AnalyticsService, EventsService, EventFiltersServ
 
 import { EventTagsFilterPipe, DecodeHtmlString, CustomTitleCasePipe } from './pipes';
 import { EmailDialogueComponent } from './saved-events/email-dialogue/email-dialogue/email-dialogue.component';
+import { StickyComponent } from './components/sticky/sticky/sticky.component';
 
 const appRoutes: Routes = [
   {
@@ -62,6 +62,7 @@ const appRoutes: Routes = [
     MainScreenComponent,
     SavedEventsComponent,
     ShareDialogueComponent,
+    StickyComponent,
 
     // Pipes
     EventTagsFilterPipe,
@@ -82,8 +83,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       { useHash: true }
-    ),
-    StickyModule
+    )
   ],
   providers: [
     AddToCalendarService,

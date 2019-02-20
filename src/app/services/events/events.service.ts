@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Event } from '../../types';
 import { environment } from '../../../environments/environment';
-import * as moment from 'moment';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

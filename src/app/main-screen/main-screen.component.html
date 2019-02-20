@@ -2,7 +2,7 @@
 <h3 class="subtitle">Everything you need to get out in Provo area...</h3>
 <h2>Local Events</h2>
 <div class="row">
-  <div class="col-sm">
+  <div class="col-lg">
     <div class="nav">
       <h3>
         Feed
@@ -11,8 +11,8 @@
     <app-event-filters></app-event-filters>
     <router-outlet></router-outlet>
   </div>
-  <div class="col-sm-5">
-    <sticky sticky-offset-top="30" sticky-class="sticky-favorites">
+  <div class="col-lg-5">
+    <sticky [sticky-media-query]="'min-width: 992px'" sticky-offset-top="30" sticky-class="sticky-favorites">
       <app-saved-events></app-saved-events>
     </sticky>
   </div>
