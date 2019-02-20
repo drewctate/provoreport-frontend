@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { EventsService } from '../services';
 import { Event } from '../types';
 import { ShareDialogueComponent } from './share-dialogue/share-dialogue.component';
@@ -15,7 +15,8 @@ export class SavedEventsComponent {
 
   constructor(
     public eventsService: EventsService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   get savedEvents() {
@@ -34,7 +35,14 @@ export class SavedEventsComponent {
       if (res === 'email') {
         const emailDialogRef = this.dialog.open(EmailDialogueComponent, { width: '500px' });
         emailDialogRef.afterClosed().subscribe(emailDialogueRes => {
-          this.eventsService.shareEvents(events, emailDialogueRes.senderName, emailDialogueRes.recipients);
+          this.eventsService.shareEvents(events, emailDialogueRes.senderName, emailDialogueRes.recipients)
+            .then(_ => {
+              this.snackBar.open('Email sent! Your friend may have to check their spam folder :)', null, { duration: 5000 });
+            })
+            .catch(err => {
+              this.snackBar.open('Email not sent :( Something went wrong on our end. Sorry!', null, { duration: 5000 });
+              console.error(err);
+            });
         });
       }
     });
