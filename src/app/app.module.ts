@@ -24,7 +24,8 @@ import { AddToCalendarService, AnalyticsService, EventsService, EventFiltersServ
 import { EventTagsFilterPipe, DecodeHtmlString, CustomTitleCasePipe } from './pipes';
 import { EmailDialogueComponent } from './saved-events/email-dialogue/email-dialogue/email-dialogue.component';
 import { StickyComponent } from './components/sticky/sticky/sticky.component';
-import { ExpandableComponent } from './componenst/expandable/expandable.component';
+import { ExpandableComponent } from './components/expandable/expandable.component';
+
 
 const appRoutes: Routes = [
   {

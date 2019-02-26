@@ -1,19 +1,7 @@
 <div class="filters border-1">
   <h4>
-    Search
+    When
   </h4>
-  <mat-form-field>
-    <input matInput placeholder="Your keywords go here..." (keyup)="debouncedSearch($event.target.value)"
-      [maxLength]="maxQueryLength">
-  </mat-form-field>
-  <h4>
-    Date
-  </h4>
-  <app-date-picker-field [placeholder]="'Start Date'" [initialValue]="activeDateRange.start"
-    (dateChange)="startDateTimeChanged($event)"></app-date-picker-field>
-  to
-  <app-date-picker-field [placeholder]="'End Date'" [initialValue]="activeDateRange.end"
-    (dateChange)="endDateTimeChanged($event)"></app-date-picker-field>
   <mat-chip-list multiple>
     <mat-chip *ngFor="let range of dateRanges" [selected]="isDateRangeSelected(range)"
       (click)="activateDateRange(range)">{{range.name}}</mat-chip>

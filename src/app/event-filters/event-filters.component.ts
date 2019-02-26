@@ -157,7 +157,7 @@ export class EventFiltersComponent implements OnInit {
 
   /**
    * Filters by search string
-   * and updates the tags.
+   * and updates the tags. (UNUSED)
    * @param range The range to filter by.
    */
   public filterBySearchString(searchString: string) {
@@ -181,6 +181,9 @@ export class EventFiltersComponent implements OnInit {
     return null;
   }
 
+  /**
+   * Signals a change in the start date. Meant to be used with custom date picker (UNUSED)
+   */
   public startDateTimeChanged(date: Moment) {
     this.customDateRange.start = date;
     this.customDateRange.end = this.activeDateRange.end;
@@ -188,6 +191,9 @@ export class EventFiltersComponent implements OnInit {
     this.activeDateRange = recognized || this.customDateRange;
   }
 
+  /**
+   * Signals a change in the start date. Meant to be used with custom date picker (UNUSED)
+   */
   public endDateTimeChanged(date: Moment) {
     this.customDateRange.end = date;
     this.customDateRange.start = this.activeDateRange.start;
