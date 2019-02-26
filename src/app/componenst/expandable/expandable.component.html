@@ -1,0 +1,7 @@
+<div class="component-wrapper hide-overflow">
+  <div #expandWrapper class='expand-wrapper' [class.collapsed]="!expanded">
+    <ng-content></ng-content>
+  </div>
+  <div class="toggle absolute-toggle" *ngIf="!expanded" (click)="toggle()">More...</div>
+  <div class="toggle" *ngIf="expanded" (click)="toggle()">Less</div>
+</div>

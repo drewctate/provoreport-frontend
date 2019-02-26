@@ -26,6 +26,10 @@ h3 {
     font-size: 16pt;
 }
 
+a {
+    color: $link-untouched !important;
+}
+
 h3.subtitle {
     margin-top: -10px;
     margin-bottom: 35px;
@@ -98,4 +102,8 @@ h3.subtitle {
     h3 {
         margin-top: 10px;
     }
+}
+
+.hide-overflow {
+    overflow: hidden;
 }

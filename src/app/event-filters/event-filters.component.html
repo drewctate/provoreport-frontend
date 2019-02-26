@@ -22,9 +22,11 @@
   <h4>
     Topics (<a (click)="clearTagFilters()">Clear All</a>)
   </h4>
-  <mat-chip-list multiple>
-    <mat-chip *ngFor="let info of tagInfos" [selected]="isTagSelected(info)" (click)="toggleSelected(info)">{{info.tag
-      | decodeHtmlString | customTitleCase }}
-      ({{info.count}})</mat-chip>
-  </mat-chip-list>
+  <app-expandable>
+    <mat-chip-list multiple>
+      <mat-chip *ngFor="let info of tagInfos" [selected]="isTagSelected(info)" (click)="toggleSelected(info)">{{info.tag
+        | decodeHtmlString | customTitleCase }}
+        ({{info.count}})</mat-chip>
+    </mat-chip-list>
+  </app-expandable>
 </div>
