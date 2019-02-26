@@ -9,7 +9,7 @@
     <span *ngIf="savedEvents.length">
         <app-event-card *ngFor="let event of savedEvents.slice().reverse(); let i = index"
             (unSaveEvent)="unSaveEvent($event)" [saved]="eventsService.isSavedEvent(event)" [event]="event"
-            [noMargin]="i === savedEvents.length - 1" [hideTags]="true"></app-event-card>
+            [noMargin]="i === savedEvents.length - 1" [xIfSaved]="true" [hideTags]="true"></app-event-card>
     </span>
     <span *ngIf="!savedEvents.length">
         <div class="no-favorites">

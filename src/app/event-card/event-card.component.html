@@ -27,7 +27,10 @@
       </div>
       <div class="actions">
         <i *ngIf="!saved" class="fa fa-heart-o icon" (click)="save(event)" alt="Save event" aria-hidden="true"></i>
-        <i *ngIf="saved" class="fa fa-heart icon" (click)="unSave(event)" alt="Un-save event" aria-hidden="true"></i>
+        <i *ngIf="saved && xIfSaved" class="fa fa-times icon" (click)="unSave(event)" alt="Un-save event"
+          aria-hidden="true"></i>
+        <i *ngIf="saved && !xIfSaved" class="fa fa-heart icon" (click)="unSave(event)" alt="Un-save event"
+          aria-hidden="true"></i>
 
         <a [matMenuTriggerFor]="calendarMenu">
           <i class="fa fa-calendar-plus-o icon color-black" aria-hidden="true"></i>

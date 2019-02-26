@@ -14,6 +14,7 @@ export class EventCardComponent {
   @Input() selectedTags: string[];
   @Input() hideTags: boolean;
   @Input() noMargin: boolean;
+  @Input() xIfSaved: boolean;
   @Output() saveEvent = new EventEmitter<Event>();
   @Output() unSaveEvent = new EventEmitter<Event>();
 

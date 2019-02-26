@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { FormBuilder, AbstractControl, Validators } from '@angular/forms';
 import { emailRegex } from './emailRegex';
@@ -26,7 +26,10 @@ export class EmailDialogueComponent {
     recipients: ['', commaSeparatedEmails],
   });
 
-  constructor(public dialogRef: MatDialogRef<EmailDialogueComponent>, private fb: FormBuilder) { }
+  constructor(
+    public dialogRef: MatDialogRef<EmailDialogueComponent>,
+    private fb: FormBuilder
+  ) { }
 
   public cancel() {
     this.dialogRef.close();
