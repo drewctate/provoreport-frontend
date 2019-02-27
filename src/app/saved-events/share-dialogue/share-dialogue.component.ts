@@ -1,6 +1,6 @@
 import { Component, DoCheck } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
-import { EventsService } from 'src/app/services';
+import { EventsService } from '../../services';
 
 @Component({
   selector: 'app-share-dialogue',

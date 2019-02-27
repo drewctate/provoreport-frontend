@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Event } from 'src/app/types';
+import { Event } from '../../types';
 
 @Injectable({
   providedIn: 'root'
