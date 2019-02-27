@@ -5,14 +5,15 @@ import {
   OnInit,
   ChangeDetectorRef
 } from '@angular/core';
-import { TagsService, EventFiltersService } from '../services';
-import { DateRange, TagInfo, Event } from '../types';
+import { MatDialog } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DateRangeGenerator } from './date-range';
-import { Moment } from 'moment';
-import { environment } from '../../environments/environment';
-
 import { first } from 'rxjs/operators';
+
+import { DateRangeGenerator } from './date-range';
+import { environment } from '../../environments/environment';
+import { DateRange, TagInfo, Event } from '../types';
+import { TagsService, EventFiltersService } from '../services';
+import { CustomDatePickerDialogComponent } from './custom-date-picker-dialog/custom-date-picker-dialog.component';
 
 @Component({
   selector: 'app-event-filters',
@@ -23,7 +24,8 @@ export class EventFiltersComponent implements OnInit {
   @Output() tagsChanged = new EventEmitter<string[]>();
 
   public activeDateRange: DateRange = DateRangeGenerator.getThisWeek();
-  private customDateRange = DateRangeGenerator.getToday();
+  public customDateRange = false; // True if activeDateRange is custom
+
   private searchString = '';
   private searchTimeout = null;
   private searchDebounceLength = 300;
@@ -38,6 +40,7 @@ export class EventFiltersComponent implements OnInit {
 
   constructor(
     private cdRef: ChangeDetectorRef,
+    private dialog: MatDialog,
     private eventFiltersService: EventFiltersService,
     private route: ActivatedRoute,
     private router: Router,
@@ -49,8 +52,10 @@ export class EventFiltersComponent implements OnInit {
     this.tagInfos = await this.tagsService.getAllTags();
     this.updateFilterTags(this.selectedTags);
     await this.getTagsFromQueryParams();
-    const gotRangeFromQueryParams = await this.getDateRangeFromQueryParams();
-    await this.initializeDateRanges(gotRangeFromQueryParams);
+    const dateRanges = await this.initializeDateRanges();
+    const weekRange = dateRanges[1];
+    const initialRange = await this.getDateRangeFromQueryParams();
+    this.activateDateRange(initialRange || weekRange);
   }
 
   /*
@@ -119,20 +124,15 @@ export class EventFiltersComponent implements OnInit {
     return DateRangeGenerator.areRangesEqual(range, this.activeDateRange);
   }
 
-  private initializeDateRanges(gotRangeFromQueryParams: boolean) {
-    const weekDateRange = DateRangeGenerator.getThisWeek();
-
+  private initializeDateRanges(): DateRange[] {
     this.dateRanges = [
       DateRangeGenerator.getToday(),
-      weekDateRange,
+      DateRangeGenerator.getThisWeek(),
       DateRangeGenerator.getThisWeekend(),
       DateRangeGenerator.getNextWeek(),
       DateRangeGenerator.getNextWeekend()
     ];
-
-    if (!gotRangeFromQueryParams) {
-      return this.activateDateRange(weekDateRange);
-    }
+    return this.dateRanges;
   }
 
   public debouncedSearch(searchString: string) {
@@ -142,12 +142,31 @@ export class EventFiltersComponent implements OnInit {
     }, this.searchDebounceLength);
   }
 
+
+  /**
+   * Opens custom date dialog, then checks if date range is truly custom.
+   * If so, activates custom range, if not, activates matching range
+   */
+  public openCustomDateDialog() {
+    const dialogRef = this.dialog.open(CustomDatePickerDialogComponent, {
+      data: {
+        activeDateRange: DateRangeGenerator.cloneRange(this.activeDateRange)
+      }
+    });
+    const subscription = dialogRef.afterClosed().subscribe((customRange: DateRange) => {
+      this.activateDateRange(customRange);
+      subscription.unsubscribe();
+    });
+  }
+
   /**
    * Activates a new date range, applies the current search string
    * and updates the tags. Currently triggers an event refresh
    * @param range The range to filter by.
    */
   public async activateDateRange(range: DateRange) {
+    const recognized = this.isRecognizedDateRange(range);
+    this.customDateRange = !recognized;
     this.activeDateRange = range;
     const filteredEvents = await this.eventFiltersService.filterEvents(
       range, this.searchString
@@ -179,26 +198,6 @@ export class EventFiltersComponent implements OnInit {
     }
 
     return null;
-  }
-
-  /**
-   * Signals a change in the start date. Meant to be used with custom date picker (UNUSED)
-   */
-  public startDateTimeChanged(date: Moment) {
-    this.customDateRange.start = date;
-    this.customDateRange.end = this.activeDateRange.end;
-    const recognized = this.isRecognizedDateRange(this.customDateRange);
-    this.activeDateRange = recognized || this.customDateRange;
-  }
-
-  /**
-   * Signals a change in the start date. Meant to be used with custom date picker (UNUSED)
-   */
-  public endDateTimeChanged(date: Moment) {
-    this.customDateRange.end = date;
-    this.customDateRange.start = this.activeDateRange.start;
-    const recognized = this.isRecognizedDateRange(this.customDateRange);
-    this.activeDateRange = recognized || this.customDateRange;
   }
 
   /*
@@ -267,18 +266,17 @@ export class EventFiltersComponent implements OnInit {
     });
   }
 
-  private getDateRangeFromQueryParams(): Promise<boolean> {
+  private getDateRangeFromQueryParams(): Promise<DateRange> {
     return new Promise((resolve) => {
       this.route.queryParamMap.pipe(first()).subscribe(params => {
         const startDateTimeStr = <string>params.get('startDateTime');
         const endDateTimeStr = <string>params.get('endDateTime');
         if (!startDateTimeStr && !endDateTimeStr) {
-          resolve(false);
+          resolve(null);
           return;
         }
         const range = DateRangeGenerator.getDateRangeFromStrings(startDateTimeStr, endDateTimeStr);
-        this.activateDateRange(range)
-          .then(_ => resolve(true));
+        resolve(range);
       });
     });
   }

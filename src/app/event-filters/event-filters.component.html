@@ -5,6 +5,7 @@
   <mat-chip-list multiple>
     <mat-chip *ngFor="let range of dateRanges" [selected]="isDateRangeSelected(range)"
       (click)="activateDateRange(range)">{{range.name}}</mat-chip>
+    <mat-chip (click)="openCustomDateDialog()" [selected]="customDateRange">Custom</mat-chip>
   </mat-chip-list>
   <br>
   <h4>

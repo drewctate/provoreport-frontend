@@ -1,0 +1,9 @@
+<app-date-picker-field [placeholder]="'Start Date'" [initialValue]="data.activeDateRange.start"
+  (dateChange)="startDateTimeChanged($event)"></app-date-picker-field>
+to
+<app-date-picker-field [placeholder]="'End Date'" [initialValue]="data.activeDateRange.end"
+  (dateChange)="endDateTimeChanged($event)"></app-date-picker-field>
+<div class="button-container">
+  <button class="btn" mat-raised-button color="warn" (click)="cancel()">Cancel</button>
+  <button class="btn" mat-raised-button color="primary" (click)="ok()">OK</button>
+</div>

@@ -70,4 +70,12 @@ export class DateRangeGenerator {
         return r1.start.isSame(r2.start, 'day') && r1.end.isSame(r2.end, 'day');
     }
 
+    static cloneRange(range: DateRange): DateRange {
+        return {
+            name: range.name,
+            start: range.start.clone(),
+            end: range.end.clone()
+        };
+    }
+
 }

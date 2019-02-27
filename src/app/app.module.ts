@@ -25,6 +25,7 @@ import { EventTagsFilterPipe, DecodeHtmlString, CustomTitleCasePipe } from './pi
 import { EmailDialogueComponent } from './saved-events/email-dialogue/email-dialogue/email-dialogue.component';
 import { StickyComponent } from './components/sticky/sticky/sticky.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
+import { CustomDatePickerDialogComponent } from './event-filters/custom-date-picker-dialog/custom-date-picker-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -55,6 +56,7 @@ const appRoutes: Routes = [
   declarations: [
     // Components
     AppComponent,
+    CustomDatePickerDialogComponent,
     DatePickerFieldComponent,
     EmailDialogueComponent,
     EventCalendarComponent,
@@ -73,8 +75,9 @@ const appRoutes: Routes = [
     CustomTitleCasePipe,
   ],
   entryComponents: [
+    CustomDatePickerDialogComponent,
     EmailDialogueComponent,
-    ShareDialogueComponent
+    ShareDialogueComponent,
   ],
   imports: [
     AppMaterialModule,
