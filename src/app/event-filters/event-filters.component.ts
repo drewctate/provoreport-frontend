@@ -12,7 +12,7 @@ import { first } from 'rxjs/operators';
 import { DateRangeGenerator } from './date-range';
 import { environment } from '../../environments/environment';
 import { DateRange, TagInfo, Event } from '../types';
-import { TagsService, EventFiltersService, FullScreenLoaderService } from '../services';
+import { TagsService, EventFiltersService, SplashService } from '../services';
 import { CustomDatePickerDialogComponent } from './custom-date-picker-dialog/custom-date-picker-dialog.component';
 
 @Component({
@@ -42,7 +42,7 @@ export class EventFiltersComponent implements OnInit {
     private cdRef: ChangeDetectorRef,
     private dialog: MatDialog,
     private eventFiltersService: EventFiltersService,
-    private fullScreenLoaderService: FullScreenLoaderService,
+    private splash: SplashService,
     private route: ActivatedRoute,
     private router: Router,
     private tagsService: TagsService
@@ -57,7 +57,7 @@ export class EventFiltersComponent implements OnInit {
     const weekRange = dateRanges[1];
     const initialRange = await this.getDateRangeFromQueryParams();
     await this.activateDateRange(initialRange || weekRange);
-    this.fullScreenLoaderService.hide();
+    this.splash.hide();
   }
 
   /*

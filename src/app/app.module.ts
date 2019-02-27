@@ -24,7 +24,7 @@ import { EmailDialogueComponent } from './saved-events/email-dialogue/email-dial
 import { StickyComponent } from './components/sticky/sticky/sticky.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
 import { CustomDatePickerDialogComponent } from './event-filters/custom-date-picker-dialog/custom-date-picker-dialog.component';
-import { FullScreenLoaderComponent } from './components/full-screen-loader/full-screen-loader.component';
+import { SplashComponent } from './components/splash/splash.component';
 
 
 const appRoutes: Routes = [
@@ -62,10 +62,10 @@ const appRoutes: Routes = [
     EventFeedComponent,
     EventFiltersComponent,
     ExpandableComponent,
-    FullScreenLoaderComponent,
     MainScreenComponent,
     SavedEventsComponent,
     ShareDialogueComponent,
+    SplashComponent,
     StickyComponent,
 
     // Pipes

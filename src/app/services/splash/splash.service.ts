@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class FullScreenLoaderService {
+export class SplashService {
   public showing = true;
 
   constructor() { }
