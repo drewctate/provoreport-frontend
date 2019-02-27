@@ -6,11 +6,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DynamoInterceptor } from './interceptors/dynamo-interceptor';
 
-import { FullCalendarModule } from 'ng-fullcalendar';
 import { AppMaterialModule } from './material-config/app.material.module';
 
 import { AppComponent } from './app.component';
-import { EventCalendarComponent } from './event-calendar/event-calendar.component';
 import { EventCardComponent } from './event-card/event-card.component';
 import { EventFeedComponent } from './event-feed/event-feed.component';
 import { EventFiltersComponent } from './event-filters/event-filters.component';
@@ -59,7 +57,6 @@ const appRoutes: Routes = [
     CustomDatePickerDialogComponent,
     DatePickerFieldComponent,
     EmailDialogueComponent,
-    EventCalendarComponent,
     EventCardComponent,
     EventFeedComponent,
     EventFiltersComponent,
@@ -85,7 +82,6 @@ const appRoutes: Routes = [
     AppMaterialModule,
     BrowserModule,
     BrowserAnimationsModule,
-    FullCalendarModule,
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule.forRoot(

@@ -306,13 +306,6 @@
     semver "5.6.0"
     semver-intersect "1.4.0"
 
-"@types/fullcalendar@3.5.2":
-  version "3.5.2"
-  resolved "https://registry.yarnpkg.com/@types/fullcalendar/-/fullcalendar-3.5.2.tgz#88cfb8962e1eb5ce11824fd95bc2f8d97a8e3518"
-  dependencies:
-    "@types/jquery" "*"
-    moment ">=2.14.0"
-
 "@types/jasmine@*":
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-3.3.0.tgz#6b0e4b0192367d77e438ff660ccc4487c9602e7b"
@@ -326,16 +319,6 @@
   resolved "https://registry.yarnpkg.com/@types/jasminewd2/-/jasminewd2-2.0.6.tgz#2f57a8d9875a6c9ef328a14bd070ba14a055ac39"
   dependencies:
     "@types/jasmine" "*"
-
-"@types/jquery@*":
-  version "3.3.22"
-  resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.3.22.tgz#cde55dc8f83207dffd16205b05f97ce824581735"
-  dependencies:
-    "@types/sizzle" "*"
-
-"@types/jquery@3.2.17":
-  version "3.2.17"
-  resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.2.17.tgz#01df9805dd5cf83a14cf5bfd81adced7d4fbd970"
 
 "@types/node@^6.0.46":
   version "6.14.2"
@@ -352,10 +335,6 @@
 "@types/selenium-webdriver@^3.0.0":
   version "3.0.13"
   resolved "https://registry.yarnpkg.com/@types/selenium-webdriver/-/selenium-webdriver-3.0.13.tgz#deb799c641773c5e367abafc92d1e733d62cddd7"
-
-"@types/sizzle@*":
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/@types/sizzle/-/sizzle-2.3.2.tgz#a811b8c18e2babab7d542b3365887ae2e4d9de47"
 
 "@webassemblyjs/ast@1.5.13":
   version "1.5.13"
@@ -2499,13 +2478,6 @@ fstream@^1.0.0, fstream@^1.0.2:
     mkdirp ">=0.5 0"
     rimraf "2"
 
-fullcalendar@3.6.1:
-  version "3.6.1"
-  resolved "https://registry.yarnpkg.com/fullcalendar/-/fullcalendar-3.6.1.tgz#0b9b62b1e697d52d39c1118af9e4e411e5045590"
-  dependencies:
-    jquery "2 - 3"
-    moment "^2.9.0"
-
 function-bind@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
@@ -3400,10 +3372,6 @@ jasminewd2@^2.1.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/jasminewd2/-/jasminewd2-2.2.0.tgz#e37cf0b17f199cce23bea71b2039395246b4ec4e"
 
-"jquery@2 - 3", jquery@^3.2.1:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
-
 js-base64@^2.1.8:
   version "2.4.9"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.4.9.tgz#748911fb04f48a60c4771b375cac45a80df11c03"
@@ -3984,7 +3952,7 @@ mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0:
   dependencies:
     minimist "0.0.8"
 
-moment@>=2.14.0, moment@^2.22.2, moment@^2.9.0:
+moment@^2.22.2:
   version "2.22.2"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
 
@@ -4053,15 +4021,6 @@ negotiator@0.6.1:
 neo-async@^2.5.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.0.tgz#b9d15e4d71c6762908654b5183ed38b753340835"
-
-ng-fullcalendar@^1.7.1:
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/ng-fullcalendar/-/ng-fullcalendar-1.7.1.tgz#c345d4d883386dd29380832257c1fa7c2adabd86"
-  dependencies:
-    "@types/fullcalendar" "3.5.2"
-    "@types/jquery" "3.2.17"
-    fullcalendar "3.6.1"
-    jquery "^3.2.1"
 
 ng2-sticky-kit@^6.1.0:
   version "6.1.0"
