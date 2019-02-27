@@ -1,3 +1,4 @@
-<app-event-card *ngFor="let event of eventFiltersService.filteredEvents | sortEvents | eventTagsFilter : selectedTags"
+<app-event-card
+    *ngFor="let event of eventFiltersService.filteredEvents | sort : 'startDateTime' : 'date' | eventTagsFilter : selectedTags"
     (saveEvent)="saveEvent($event)" (unSaveEvent)="unSaveEvent($event)" [saved]="isEventSaved(event)" [event]="event"
     [selectedTags]="selectedTags"></app-event-card>
