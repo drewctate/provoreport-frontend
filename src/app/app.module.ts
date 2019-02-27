@@ -21,7 +21,7 @@ import { DatePickerFieldComponent } from './date-picker-field/date-picker-field.
 
 import { AddToCalendarService, AnalyticsService, EventsService, EventFiltersService } from './services';
 
-import { EventTagsFilterPipe, DecodeHtmlString, CustomTitleCasePipe, SortPipe } from './pipes';
+import { EventTagsFilterPipe, DecodeHtmlString, CustomTitleCasePipe, ReversePipe, SortPipe } from './pipes';
 import { EmailDialogueComponent } from './saved-events/email-dialogue/email-dialogue/email-dialogue.component';
 import { StickyComponent } from './components/sticky/sticky/sticky.component';
 import { ExpandableComponent } from './components/expandable/expandable.component';
@@ -73,6 +73,7 @@ const appRoutes: Routes = [
     EventTagsFilterPipe,
     DecodeHtmlString,
     CustomTitleCasePipe,
+    ReversePipe,
     SortPipe,
   ],
   entryComponents: [
