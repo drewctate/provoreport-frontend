@@ -27,11 +27,11 @@ export class DynamoInterceptor implements HttpInterceptor {
       map(evt => {
         if (evt instanceof HttpResponse) {
           try {
-            const parsedFromDynamo: Event[] = evt.body.Items.map(eventItem => dynamoConverters.itemToData(eventItem));
-            const nonesNowNulls: Event[] = parsedFromDynamo.map(event => this.nonesToNulls(event));
+            const items = evt.body;
+            const nonesNowNulls: Event[] = items.map(event => this.nonesToNulls(event));
             evt = evt.clone({ body: nonesNowNulls });
           } catch (err) {
-            console.log('Assuming not a Dynamo response; not converting.', err);
+            console.log('Error in interceptor: ', err);
           }
         }
         return evt;
