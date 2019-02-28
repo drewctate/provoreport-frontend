@@ -31,6 +31,10 @@ const getSortFunc = (attribute: string, type: 'date' | 'val') => {
 export class SortPipe implements PipeTransform {
 
   transform(array: any[], attribute: string, type: 'date' | 'val' = 'val'): any {
+    if (!array) {
+      return;
+    }
+
     if (attribute) {
       return array.sort(getSortFunc(attribute, type));
     } else {

@@ -6,6 +6,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ReversePipe implements PipeTransform {
 
   transform(array: any[]): any[] {
+    if (!array) {
+      return;
+    }
+
     return array.reverse();
   }
 
