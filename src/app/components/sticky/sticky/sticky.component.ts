@@ -165,7 +165,6 @@ export class StickyComponent implements OnInit, AfterViewInit {
     }
     // stick
     else if (position > this.containerStart && position < this.scrollFinish) {
-      console.log('sticking');
       this.stuckElement();
     }
   }

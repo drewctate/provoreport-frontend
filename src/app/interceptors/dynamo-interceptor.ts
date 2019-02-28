@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
-import dynamoConverters from 'dynamo-converters';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -27,9 +26,11 @@ export class DynamoInterceptor implements HttpInterceptor {
       map(evt => {
         if (evt instanceof HttpResponse) {
           try {
-            const items = evt.body;
-            const nonesNowNulls: Event[] = items.map(event => this.nonesToNulls(event));
-            evt = evt.clone({ body: nonesNowNulls });
+            if (evt.url.includes('events?startDateTime')) {
+              const items = evt.body;
+              const nonesNowNulls: Event[] = items.map(event => this.nonesToNulls(event));
+              evt = evt.clone({ body: nonesNowNulls });
+            }
           } catch (err) {
             console.log('Error in interceptor: ', err);
           }
