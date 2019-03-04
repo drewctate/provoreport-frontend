@@ -14,9 +14,9 @@ import { ShareDialogueComponent } from './saved-events/share-dialogue/share-dial
 import { AddToCalendarService, EventsService, EventFiltersService } from './services';
 
 import { EventTagsFilterPipe, CustomTitleCasePipe, DecodeHtmlString } from './pipes';
-import { ComponentsGlobalModule } from '../components-global/components-global.module';
-import { AppMaterialModule } from '../material-config/app.material.module';
-import { PipesGlobalModule } from '../pipes-global/pipes-global.module';
+import { ComponentsGlobalModule } from '../../components-global/components-global.module';
+import { AppMaterialModule } from '../../material-config/app.material.module';
+import { PipesGlobalModule } from '../../pipes-global/pipes-global.module';
 
 @NgModule({
     declarations: [

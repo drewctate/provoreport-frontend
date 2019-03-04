@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Event } from '../../../types';
+import { Event } from '../../../../types';
 import { CalendarUtils } from './utils';
 
 import saveAs from 'file-saver';

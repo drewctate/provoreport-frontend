@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { DateRange } from '../../../types';
+import { DateRange } from '../../../../types';
 import { Moment } from 'moment';
 
 

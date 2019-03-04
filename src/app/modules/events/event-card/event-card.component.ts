@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AddToCalendarService } from '../services';
-import { AnalyticsService } from '../../services';
-import { Event } from '../../types';
+import { AnalyticsService } from '../../../services';
+import { Event } from '../../../types';
 
 @Component({
   selector: 'app-event-card',

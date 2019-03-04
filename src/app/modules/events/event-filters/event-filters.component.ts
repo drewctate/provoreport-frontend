@@ -10,10 +10,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 
 import { DateRangeGenerator } from './date-range';
-import { environment } from '../../../environments/environment';
-import { DateRange, TagInfo, Event } from '../../types';
+import { environment } from '../../../../environments/environment';
+import { DateRange, TagInfo, Event } from '../../../types';
 import { TagsService, EventFiltersService } from '../services';
-import { SplashService } from '../../services';
+import { SplashService } from '../../../services';
 import { CustomDatePickerDialogComponent } from './custom-date-picker-dialog/custom-date-picker-dialog.component';
 
 @Component({

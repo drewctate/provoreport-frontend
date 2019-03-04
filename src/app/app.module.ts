@@ -6,12 +6,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DynamoInterceptor } from './interceptors/dynamo-interceptor';
 
 import { AppComponent } from './app.component';
-import { EventFeedComponent } from './events/event-feed/event-feed.component';
+import { EventFeedComponent } from './modules/events/event-feed/event-feed.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 
 import { AnalyticsService } from './services';
 
-import { EventsModule } from './events/events.module';
+import { AdminModule } from './modules/admin/admin.module';
+import { EventsModule } from './modules/events/events.module';
 import { ComponentsGlobalModule } from './components-global/components-global.module';
 import { PipesGlobalModule } from './pipes-global/pipes-global.module';
 
@@ -53,6 +54,7 @@ const appRoutes: Routes = [
     ),
 
     // In-app
+    AdminModule,
     EventsModule,
     ComponentsGlobalModule,
     PipesGlobalModule

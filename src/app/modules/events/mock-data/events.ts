@@ -1,4 +1,4 @@
-import { Event } from '../..//types/index';
+import { Event } from '../../../types/index';
 import * as moment from 'moment';
 
 export class EventFaker {

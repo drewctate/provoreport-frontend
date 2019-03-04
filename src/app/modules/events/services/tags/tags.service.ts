@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EventsService } from '../events/events.service';
-import { Event, TagInfo } from '../../../types';
+import { Event, TagInfo } from '../../../../types';
 
 @Injectable({
   providedIn: 'root'

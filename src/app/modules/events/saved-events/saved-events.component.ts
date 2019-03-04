@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { EventsService } from '../services';
-import { Event } from '../../types';
+import { Event } from '../../../types';
 import { ShareDialogueComponent } from './share-dialogue/share-dialogue.component';
 import { EmailDialogueComponent } from './email-dialogue/email-dialogue.component';
 

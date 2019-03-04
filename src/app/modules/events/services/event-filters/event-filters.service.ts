@@ -3,8 +3,8 @@ import * as moment from 'moment';
 import * as Fuse from 'fuse.js';
 
 import { EventsService } from '../events/events.service';
-import { DateRange, Event } from '../../../types';
-import { environment } from '../../../../environments/environment';
+import { DateRange, Event } from '../../../../types';
+import { environment } from '../../../../../environments/environment';
 
 
 @Injectable({

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Event } from '../../../types';
-import { environment } from '../../../../environments/environment';
+import { Event } from '../../../../types';
+import { environment } from '../../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

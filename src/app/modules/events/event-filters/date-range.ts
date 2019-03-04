@@ -1,6 +1,6 @@
 import * as moment from 'moment';
 
-import { DateRange } from '../../types';
+import { DateRange } from '../../../types';
 
 export class DateRangeGenerator {
     private static readonly MONDAY = 1;

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Event } from '../../../types';
+import { Event } from '../../../../types';
 
 @Pipe({
   name: 'eventTagsFilter'
