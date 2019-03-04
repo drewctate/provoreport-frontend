@@ -3,28 +3,18 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
 import { DynamoInterceptor } from './interceptors/dynamo-interceptor';
 
-import { AppMaterialModule } from './material-config/app.material.module';
-
 import { AppComponent } from './app.component';
-import { EventCardComponent } from './event-card/event-card.component';
-import { EventFeedComponent } from './event-feed/event-feed.component';
-import { EventFiltersComponent } from './event-filters/event-filters.component';
+import { EventFeedComponent } from './events/event-feed/event-feed.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
-import { SavedEventsComponent } from './saved-events/saved-events.component';
-import { ShareDialogueComponent } from './saved-events/share-dialogue/share-dialogue.component';
-import { DatePickerFieldComponent } from './date-picker-field/date-picker-field.component';
 
-import { AddToCalendarService, AnalyticsService, EventsService, EventFiltersService } from './services';
+import { AnalyticsService } from './services';
 
-import { EventTagsFilterPipe, DecodeHtmlString, CustomTitleCasePipe, ReversePipe, SortPipe } from './pipes';
-import { EmailDialogueComponent } from './saved-events/email-dialogue/email-dialogue/email-dialogue.component';
-import { StickyComponent } from './components/sticky/sticky/sticky.component';
-import { ExpandableComponent } from './components/expandable/expandable.component';
-import { CustomDatePickerDialogComponent } from './event-filters/custom-date-picker-dialog/custom-date-picker-dialog.component';
-import { SplashComponent } from './components/splash/splash.component';
+import { EventsModule } from './events/events.module';
+import { ComponentsGlobalModule } from './components-global/components-global.module';
+import { PipesGlobalModule } from './pipes-global/pipes-global.module';
+
 
 
 const appRoutes: Routes = [
@@ -40,10 +30,6 @@ const appRoutes: Routes = [
       {
         path: 'feed',
         component: EventFeedComponent,
-      },
-      {
-        path: 'calendar',
-        redirectTo: 'feed'
       }
     ]
   },
@@ -55,47 +41,24 @@ const appRoutes: Routes = [
   declarations: [
     // Components
     AppComponent,
-    CustomDatePickerDialogComponent,
-    DatePickerFieldComponent,
-    EmailDialogueComponent,
-    EventCardComponent,
-    EventFeedComponent,
-    EventFiltersComponent,
-    ExpandableComponent,
     MainScreenComponent,
-    SavedEventsComponent,
-    ShareDialogueComponent,
-    SplashComponent,
-    StickyComponent,
-
-    // Pipes
-    EventTagsFilterPipe,
-    DecodeHtmlString,
-    CustomTitleCasePipe,
-    ReversePipe,
-    SortPipe,
-  ],
-  entryComponents: [
-    CustomDatePickerDialogComponent,
-    EmailDialogueComponent,
-    ShareDialogueComponent,
   ],
   imports: [
-    AppMaterialModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    ReactiveFormsModule,
     RouterModule.forRoot(
       appRoutes,
       { useHash: true }
-    )
+    ),
+
+    // In-app
+    EventsModule,
+    ComponentsGlobalModule,
+    PipesGlobalModule
   ],
   providers: [
-    AddToCalendarService,
     AnalyticsService,
-    EventsService,
-    EventFiltersService,
     { provide: HTTP_INTERCEPTORS, useClass: DynamoInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
