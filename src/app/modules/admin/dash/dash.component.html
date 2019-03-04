@@ -1,3 +1,28 @@
-<p>
-  dash works!
-</p>
+<div *ngFor="let record of harvestRecords | sort : 'harvestDateTime' : 'date' | reverse"
+  class="harvest-record border-2">
+  <h3>{{record.harvestDateTime | date : 'long'}}</h3>
+  <p>{{record.id}}</p>
+  <h4>Sources:</h4>
+  <div *ngFor="let sourceRecord of record.sources" class="source-record border-1">
+    {{sourceRecord.funcName}}
+    <div *ngIf="sourceRecord.errorMsg" class="error">
+      ERROR: {{sourceRecord.errorMsg}}
+    </div>
+    <div *ngIf="!sourceRecord.errorMsg" class="green">
+      <table>
+        <tr>
+          <td>Events Harvested:</td>
+          <td>{{sourceRecord.eventsFound}}</td>
+        </tr>
+        <tr>
+          <td>Duplicate Events:</td>
+          <td>{{sourceRecord.eventsDuplicate}}</td>
+        </tr>
+        <tr>
+          <td>Events Added:</td>
+          <td>{{sourceRecord.eventsAdded}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

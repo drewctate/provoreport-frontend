@@ -1,0 +1,18 @@
+.harvest-record {
+    padding: 10px;
+
+    h3 {
+        margin: 0;
+    }
+    .source-record {
+        margin-left: 40px;
+
+        .green {
+            background-color: lightgreen;
+        }
+
+        .error {
+            background-color: lightcoral;
+        }
+    }
+}
