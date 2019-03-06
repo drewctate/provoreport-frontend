@@ -1,59 +1,62 @@
-<div class="card border-1" [ngClass]="{'margin-bottom': !noMargin}">
-  <div class="app-flex-column container">
-    <div class="app-flex-row">
+<div class="card border-1 container" [ngClass]="{'margin-bottom': !noMargin}">
+  <div class="row">
+    <div class="col-md-3">
       <div class="thumbnail-container">
         <span class="helper"></span>
         <img *ngIf="event.thumbnail" class="thumbnail" src={{event.thumbnail}}>
         <img *ngIf="!event.thumbnail" class="thumbnail" src="assets/no-image.png">
       </div>
-      <div class="event-info">
-        <h4><a href={{event.url}} (click)="recordView(event)" target="_blank">{{event.title | decodeHtmlString}}</a>
-        </h4>
-        <table>
-          <tr *ngIf="event.startDateTime">
-            <td><b>Date:</b></td>
-            <td>{{event.startDateTime | date : 'EEEE, MMM d, y'}}</td>
-          </tr>
-          <tr *ngIf="event.startDateTime">
-            <td><b>Time:</b></td>
-            <td>{{event.startDateTime | date : 'shortTime'}}</td>
-          </tr>
-          <tr *ngIf="event.location">
-            <td><b>Location:</b></td>
-            <td>{{event.location}}</td>
-          </tr>
-        </table>
+    </div>
+    <div class="event-info col-md-9">
+      <div class="row">
+        <div class="col-10">
+          <h4><a href={{event.url}} (click)="recordView(event)" target="_blank">{{event.title | decodeHtmlString}}</a>
+          </h4>
+          <table>
+            <tr *ngIf="event.startDateTime">
+              <td><b>Date:</b></td>
+              <td>{{event.startDateTime | date : 'EEEE, MMM d, y'}}</td>
+            </tr>
+            <tr *ngIf="event.startDateTime">
+              <td><b>Time:</b></td>
+              <td>{{event.startDateTime | date : 'shortTime'}}</td>
+            </tr>
+            <tr *ngIf="event.location">
+              <td><b>Location:</b></td>
+              <td>{{event.location}}</td>
+            </tr>
+          </table>
+        </div>
+        <div class="actions col-2">
+          <i *ngIf="!saved" class="fa fa-heart-o icon" (click)="save(event)" alt="Save event" aria-hidden="true"></i>
+          <i *ngIf="saved && xIfSaved" class="fa fa-times icon" (click)="unSave(event)" alt="Un-save event"
+            aria-hidden="true"></i>
+          <i *ngIf="saved && !xIfSaved" class="fa fa-heart icon" (click)="unSave(event)" alt="Un-save event"
+            aria-hidden="true"></i>
 
-      </div>
-      <div class="actions">
-        <i *ngIf="!saved" class="fa fa-heart-o icon" (click)="save(event)" alt="Save event" aria-hidden="true"></i>
-        <i *ngIf="saved && xIfSaved" class="fa fa-times icon" (click)="unSave(event)" alt="Un-save event"
-          aria-hidden="true"></i>
-        <i *ngIf="saved && !xIfSaved" class="fa fa-heart icon" (click)="unSave(event)" alt="Un-save event"
-          aria-hidden="true"></i>
+          <a [matMenuTriggerFor]="calendarMenu">
+            <i class="fa fa-calendar-plus-o icon color-black" aria-hidden="true"></i>
+          </a>
 
-        <a [matMenuTriggerFor]="calendarMenu">
-          <i class="fa fa-calendar-plus-o icon color-black" aria-hidden="true"></i>
-        </a>
-
-        <mat-menu #calendarMenu="matMenu">
-          <a href="{{getGoogleCalendarUrl(event)}}" class="no-underline" target="_blank"><button mat-menu-item>Google
-              Calendar</button></a>
-          <button mat-menu-item (click)="downloadIcs(event)">ICalendar</button>
-          <button mat-menu-item (click)="downloadIcs(event)">Outlook</button>
-          <a href="{{getYahooCalendarUrl(event)}}" class="no-underline" target="_blank"><button mat-menu-item>Yahoo
-              Calendar</button></a>
-          <a href="{{getMicrosoftCalendarUrl(event)}}" class="no-underline" target="_blank"><button
-              mat-menu-item>Microsoft
-              Calendar</button></a>
-        </mat-menu>
+          <mat-menu #calendarMenu="matMenu">
+            <a href="{{getGoogleCalendarUrl(event)}}" class="no-underline" target="_blank"><button mat-menu-item>Google
+                Calendar</button></a>
+            <button mat-menu-item (click)="downloadIcs(event)">ICalendar</button>
+            <button mat-menu-item (click)="downloadIcs(event)">Outlook</button>
+            <a href="{{getYahooCalendarUrl(event)}}" class="no-underline" target="_blank"><button mat-menu-item>Yahoo
+                Calendar</button></a>
+            <a href="{{getMicrosoftCalendarUrl(event)}}" class="no-underline" target="_blank"><button
+                mat-menu-item>Microsoft
+                Calendar</button></a>
+          </mat-menu>
+        </div>
       </div>
     </div>
-    <div *ngIf="!hideTags && event.tags && event.tags.length" class="tag-wrapper app-flex-row">
-      <mat-chip-list multiple>
-        <mat-chip *ngFor="let tag of event.tags" [selected]="isTagSelected(tag)" [innerHTML]='tag
+  </div>
+  <div *ngIf="!hideTags && event.tags && event.tags.length" class="tag-wrapper app-flex-row">
+    <mat-chip-list multiple>
+      <mat-chip *ngFor="let tag of event.tags" [selected]="isTagSelected(tag)" [innerHTML]='tag
         | customTitleCase'></mat-chip>
-      </mat-chip-list>
-    </div>
+    </mat-chip-list>
   </div>
 </div>
