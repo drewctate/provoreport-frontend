@@ -18,6 +18,7 @@ import { EventTagsFilterPipe, CustomTitleCasePipe, DecodeHtmlString } from './pi
 import { ComponentsGlobalModule } from '../../components-global/components-global.module';
 import { AppMaterialModule } from '../../material-config/app.material.module';
 import { PipesGlobalModule } from '../../pipes-global/pipes-global.module';
+import { DirectivesGlobalModule } from '../../directives-global/directives-global.module';
 
 @NgModule({
     declarations: [
@@ -36,9 +37,10 @@ import { PipesGlobalModule } from '../../pipes-global/pipes-global.module';
     ],
     imports: [
         AppMaterialModule,
-        CommonModule,
         BrowserModule,
+        CommonModule,
         ComponentsGlobalModule,
+        DirectivesGlobalModule,
         PipesGlobalModule,
         ReactiveFormsModule
     ],

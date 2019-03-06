@@ -53,10 +53,10 @@
       </div>
     </div>
   </div>
-  <div *ngIf="!hideTags && event.tags && event.tags.length" class="tag-wrapper app-flex-row">
-    <mat-chip-list multiple>
+  <div *ngIf="!hideTags && event.tags && event.tags.length">
+    <mat-chip-list appHorizontalChips multiple>
       <mat-chip *ngFor="let tag of event.tags" [selected]="isTagSelected(tag)" [innerHTML]='tag
-        | customTitleCase'></mat-chip>
+            | customTitleCase'></mat-chip>
     </mat-chip-list>
   </div>
 </div>
