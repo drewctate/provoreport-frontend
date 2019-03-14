@@ -7,6 +7,7 @@ export interface Event {
     ticketsUrl: string;
     startDateTime: string;
     endDateTime: string;
+    timeStr: string;
     thumbnail: string;
     past: string;
     tags: Array<string>;

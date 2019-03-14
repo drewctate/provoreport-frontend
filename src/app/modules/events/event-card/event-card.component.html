@@ -15,11 +15,11 @@
           <table>
             <tr *ngIf="event.startDateTime">
               <td><b>Date:</b></td>
-              <td>{{event.startDateTime | date : 'EEEE, MMM d, y'}}</td>
+              <td>{{event.startDateTime | date : 'EEEE, MMM d, y' : 'America/Denver'}}</td>
             </tr>
             <tr *ngIf="event.startDateTime">
               <td><b>Time:</b></td>
-              <td>{{event.startDateTime | date : 'shortTime'}}</td>
+              <td>{{event.timeStr || (event.startDateTime | date : 'shortTime' : 'America/Denver')}}</td>
             </tr>
             <tr *ngIf="event.location">
               <td><b>Location:</b></td>
