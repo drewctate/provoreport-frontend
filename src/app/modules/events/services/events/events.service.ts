@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Event } from '../../../../types';
 import { environment } from '../../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,8 @@ export class EventsService {
     }
 
     return new Promise<Event[]>((resolve) => {
-      this.http.get(`${environment.ROOT_URL}/events`, { params: { startDateTime: '20190114T190000', endDateTime: '20200114T190000' } })
+      this.http.get(`${environment.ROOT_URL}/events`,
+        { params: { startDateTime: moment().toISOString(), endDateTime: moment().add(2, 'week').toISOString() } })
         .subscribe((events: Event[]) => {
           this._events = events;
           resolve(events);
