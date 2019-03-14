@@ -3,11 +3,14 @@ import { Event } from '../../../../types';
 import { CalendarUtils } from './utils';
 
 import saveAs from 'file-saver';
+import * as moment from 'moment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AddToCalendarService {
+
+    private formatString = 'YYYYMMDDTHHmmss';
 
     constructor() { }
 
@@ -61,9 +64,9 @@ export class AddToCalendarService {
      * @param event Event to generate link from
      */
     public getGoogleCalendarUrl(event: Event) {
-        let googleCalendarUrl = 'https://www.google.com/calendar/render?action=TEMPLATE'
+        let googleCalendarUrl = 'https://www.google.com/calendar/render?action=TEMPLATE';
         googleCalendarUrl += `&text=${event.title}`;
-        googleCalendarUrl += `&dates=${event.startDateTime}/${event.endDateTime}`;
+        googleCalendarUrl += `&dates=${moment(event.startDateTime).format(this.formatString)}/${moment(event.endDateTime).format(this.formatString)}`;
         googleCalendarUrl += `&details=${event.url}`;
         if (event.location) {
             googleCalendarUrl += `&location=${event.location}`;
@@ -77,23 +80,12 @@ export class AddToCalendarService {
         const duration = CalendarUtils.getHoursDuration(event.startDateTime, event.endDateTime);
 
         yahooCalendarUrl += '&TITLE=' + event.title;
-        yahooCalendarUrl += '&ST=' + event.startDateTime + '&DUR=' + duration;
+        yahooCalendarUrl += '&ST=' + moment(event.startDateTime).format(this.formatString) + '&DUR=' + duration;
         yahooCalendarUrl += '&DESC=' + event.url;
         yahooCalendarUrl += '&in_loc=' + event.location;
 
         return yahooCalendarUrl;
     }
-
-    public getMicrosoftCalendarUrl(event: Event) {
-        let microsoftCalendarUrl = 'http://calendar.live.com/calendar/calendar.aspx?rru=addevent';
-        microsoftCalendarUrl += '&summary=' + event.title;
-        microsoftCalendarUrl += '&dtstart=' + event.startDateTime + '&dtend=' + event.endDateTime;
-        microsoftCalendarUrl += '&description=' + event.url;
-        microsoftCalendarUrl += '&location=' + event.location;
-
-        return microsoftCalendarUrl;
-    }
-
 
     public downloadIcs(event: Event) {
         const fileName = CalendarUtils.getIcsFileName(event.title),
@@ -110,8 +102,8 @@ export class AddToCalendarService {
             'BEGIN:VEVENT',
             'CLASS:PUBLIC',
             'DESCRIPTION:' + CalendarUtils.formatIcsText(event.url, 62),
-            'DTSTART:' + event.startDateTime,
-            'DTEND:' + event.endDateTime,
+            'DTSTART:' + moment(event.startDateTime).format(this.formatString),
+            'DTEND:' + moment(event.endDateTime).format(this.formatString),
             'LOCATION:' + CalendarUtils.formatIcsText(event.location, 64),
             'SUMMARY:' + CalendarUtils.formatIcsText(event.title, 66),
             'TRANSP:TRANSPARENT',

@@ -49,10 +49,6 @@ export class EventCardComponent {
     return this.addToCalendar.getYahooCalendarUrl(event);
   }
 
-  public getMicrosoftCalendarUrl(event: Event) {
-    return this.addToCalendar.getMicrosoftCalendarUrl(event);
-  }
-
   public downloadIcs(event: Event) {
     this.addToCalendar.downloadIcs(event);
   }
