@@ -21,7 +21,7 @@ export class DashService {
       this.http.get(`${environment.ROOT_URL}/harvestrecords`)
         .subscribe(res => {
           resolve(<HarvestRecord[]>res);
-        }, err => reject);
+        }, reject);
     });
   }
 }
