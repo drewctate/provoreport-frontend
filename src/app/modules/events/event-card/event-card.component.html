@@ -10,7 +10,8 @@
     <div class="event-info col-md-9">
       <div class="row">
         <div class="col-10">
-          <h4><a href={{event.url}} (click)="recordView(event)" target="_blank">{{event.title | decodeHtmlString}}</a>
+          <h4><a class="event-title" href={{event.url}} (click)="recordView(event)"
+              target="_blank">{{event.title | decodeHtmlString}}</a>
           </h4>
           <table>
             <tr *ngIf="event.startDateTime">

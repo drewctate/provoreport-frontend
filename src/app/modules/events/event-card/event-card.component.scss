@@ -4,9 +4,14 @@
 .container {
     padding: 5px 16px;
 
+
     .event-info {
         flex-grow: 1;
         padding: 8px 8px 8px 12px;
+
+        .event-title {
+            font-size: 14pt;
+        }
 
         td {
             padding-right: 8px;
