@@ -2,6 +2,16 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "./variables.scss";
 
+@font-face {
+    font-family: MarketDeco;
+    src: url('assets/fonts/Market_Deco.ttf');
+}
+
+@font-face {
+    font-family: Timeless;
+    src: url('assets/fonts/Timeless.ttf');
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -12,7 +22,7 @@ html, body {
 }
 
 h1 {
-    font-size: 60pt;
+    font-size: 70pt;
     font-family: sans-serif;
     margin-bottom: 0 !important;
     line-height: 60pt;
@@ -32,11 +42,14 @@ a {
 }
 
 h1.title {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin-top: 8px;
+    font-family: MarketDeco, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 h3.subtitle {
-    margin-top: 0;
+    font-family: Timeless, Georgia, 'Times New Roman', Times, serif;
+    font-size: 20pt;
+    margin-top: 8px;
     margin-bottom: 35px;
 }
 
