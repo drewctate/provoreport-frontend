@@ -1,0 +1,9 @@
+@import '../../../../variables.scss';
+
+p {
+    width: 100%;
+    text-align: right;
+    color: $link-untouched;
+    margin-top: 8px;
+    cursor: pointer;
+}

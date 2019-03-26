@@ -13,6 +13,7 @@ import { AnalyticsService } from './services';
 
 import { AdminModule } from './modules/admin/admin.module';
 import { EventsModule } from './modules/events/events.module';
+import { FeedbackModule } from './modules/feedback/feedback.module';
 import { ComponentsGlobalModule } from './components-global/components-global.module';
 import { PipesGlobalModule } from './pipes-global/pipes-global.module';
 
@@ -37,6 +38,7 @@ import { appRoutes } from './app.routes';
     // In-app
     AdminModule,
     EventsModule,
+    FeedbackModule,
     ComponentsGlobalModule,
     PipesGlobalModule
   ],
