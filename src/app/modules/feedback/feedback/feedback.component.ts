@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { FeedbackDialogueComponent } from '../feedback-dialogue/feedback-dialogue.component';
+import { FeedbackService } from '../services/feedback.service';
 
 @Component({
   selector: 'app-feedback',
@@ -9,13 +10,12 @@ import { FeedbackDialogueComponent } from '../feedback-dialogue/feedback-dialogu
 })
 export class FeedbackComponent {
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private feedbackService: FeedbackService) { }
 
   public openFeedbackDialog() {
-    console.log('here');
     const feedbackDialog = this.dialog.open(FeedbackDialogueComponent, { width: '500px' });
-    feedbackDialog.afterClosed().subscribe(res => {
-      console.log(res);
+    feedbackDialog.afterClosed().subscribe(feedback => {
+      this.feedbackService.sendFeedback(feedback);
     });
   }
 

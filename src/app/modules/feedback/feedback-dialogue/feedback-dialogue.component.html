@@ -1,3 +1,14 @@
-<p>
-  feedback-dialogue works!
-</p>
+<h3>
+  Give Feedback
+</h3>
+<mat-form-field>
+  <input matInput required placeholder="Name" [(ngModel)]="feedback.name" #name="ngModel">
+</mat-form-field>
+<mat-form-field>
+  <input matInput email placeholder="Email (optional)" [(ngModel)]="feedback.email" #email="ngModel">
+</mat-form-field>
+<mat-form-field>
+  <textarea matInput required placeholder="Message" #message="ngModel" [(ngModel)]="feedback.message"></textarea>
+</mat-form-field>
+<button (click)="sendFeedback()" mat-raised-button
+  [disabled]='name.invalid || message.invalid || email.invalid'>Send</button>
