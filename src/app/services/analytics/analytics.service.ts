@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Event } from '../../types';
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnalyticsService {
 
-  constructor() { }
+  constructor() {
+    if (!environment.production) {
+      // Only record views, etc on prod
+      window['ga-disable-UA-134145646-1'] = true;
+    }
+  }
 
   /**
    * When a user clicks the item link
